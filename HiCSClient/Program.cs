@@ -16,7 +16,7 @@ namespace HiCSClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmUser());
+            Application.Run(new HiCSClient.Test.DataGridViewTestFrm());
         }
     }
 }
