@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{B6A3AB36-E4BA-4005-BFE1-A3FA310CA08E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>OutWardUserControl</RootNamespace>
+    <AssemblyName>OutWardUserControl</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HiCSDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\HiCSDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ProcessMaterial.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="ProcessMaterial.Designer.cs">
+      <DependentUpon>ProcessMaterial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\LoginModuleTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\LoginModuleTest.Designer.cs">
+      <DependentUpon>LoginModuleTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\ProcessMaterialTest1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Test\ProcessMaterialTest1.Designer.cs">
+      <DependentUpon>ProcessMaterialTest1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Test\UnitTest_Login.cs" />
+    <Compile Include="Test\UnitTest_ProcessMaterial.cs" />
+    <Compile Include="UserControl1.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserControl1.Designer.cs">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UserLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UserLogin.Designer.cs">
+      <DependentUpon>UserLogin.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UserLoginModule.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UserLoginModule.Designer.cs">
+      <DependentUpon>UserLoginModule.cs</DependentUpon>
+    </Compile>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+    <Service Include="{94E38DFF-614B-4cbd-B67C-F211BB35CE8B}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ProcessMaterial.resx">
+      <DependentUpon>ProcessMaterial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\LoginModuleTest.resx">
+      <DependentUpon>LoginModuleTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Test\ProcessMaterialTest1.resx">
+      <DependentUpon>ProcessMaterialTest1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserControl1.resx">
+      <DependentUpon>UserControl1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserLogin.resx">
+      <DependentUpon>UserLogin.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UserLoginModule.resx">
+      <DependentUpon>UserLoginModule.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OutWardCommonControl\OutWardCommonControl.csproj">
+      <Project>{eee5c22e-bc57-4cde-8921-fdf57048ddae}</Project>
+      <Name>OutWardCommonControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OutWardControl\OutWardControl.csproj">
+      <Project>{50fd9f07-44ba-44f4-8ffd-c3e0634462a9}</Project>
+      <Name>OutWardControl</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OutWardLib\OutWardProvid.csproj">
+      <Project>{d7ce0d0d-2e63-400c-832f-a5e725fdb64d}</Project>
+      <Name>OutWardProvid</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\OutWardModel\OutWardModel.csproj">
+      <Project>{ba91ee53-3d9e-4672-8f91-6336fa25e858}</Project>
+      <Name>OutWardModel</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

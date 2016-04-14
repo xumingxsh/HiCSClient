@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<SQL-List>
+    <MODULE id="Production" script="产品相关操作">
+        <SQL id="ProductProvid.GetProductProcesses" type="oledb">
+            <TEXT>
+			Select ProductID, ProcessId,Name,Type,StartState from [ProductProcess$] where productID=@productID       
+            </TEXT>
+
+            <Paramers>
+                <paramer name="@productID" value="productID" script=""/>
+            </Paramers>
+        </SQL>
+		<!--取得产品的所有工序 -->
+        <SQL id="ProductProvid.GetProductProcesses_parm1" type="oledb">
+            <TEXT>
+			Select ProcessId,Name,Type,StartState from [ProductProcess$] where productID='{0}' 
+            </TEXT>
+        </SQL>
+        <SQL id="ProductProvid.GetProductProcessMaterial" type="oledb">
+            <TEXT>
+			Select ProductID,ProcessId,Name,Model,Count
+			from [ProcessMaterial$] where productID=@productID
+					and processID=@processID
+            </TEXT>
+            <Paramers>
+                <paramer name="@productID" value="productID" script=""/>
+                <paramer name="@processID" value="processID" script=""/>
+            </Paramers>
+        </SQL>
+		<!-- 取得产品工序的物料(注：物料类型可选)-->
+        <SQL id="ProductProvid.GetProductProcessMaterial_parm3" type="oledb">
+            <TEXT>
+			Select ProductID,ProcessId,Name,MType,Model,Count
+			from [ProcessMaterial$] where productID='{0}'
+					and processID={1} {2}
+            </TEXT>
+        </SQL>
+		<!-- 取得产品工序的输入项信息-->
+        <SQL id="ProductProvid.GetProcessInput_parm2" type="oledb">
+            <TEXT>
+			Select ProductID,	ProcessId,	InputID,	Text,	InType,	InBox1,	InitValue1,	InBox2,	InitValue2
+			from [ProcessInput$] where productID='{0}'
+					and processID={1}
+            </TEXT>
+        </SQL>
+		<!-- 取得某日生产计划-->
+        <SQL id="ProductProvid.GetPlan" type="oledb">
+            <TEXT>
+			Select PlanId,	j.ProductID,	Date,	Count,ProductType, ProductModel
+			from [ProductPlan$] j left join [Productions$] c on j.ProductID=c.ProductID 
+			where Date&gt;@begin and Date&lt;@end
+            </TEXT>
+            <Paramers>
+                <paramer name="@begin" value="begin" script=""/>
+                <paramer name="@end" value="end" script=""/>
+            </Paramers>
+        </SQL>
+		<!-- 取得产品生产状态-->
+        <SQL id="ProductProvid.GetProductState" type="oledb">
+            <TEXT>
+			Select r.ProductID,	Date,	Number,	r.Process, StartState
+			from [ProductReal$] r left join [ProductProcess$] p on r.ProductID=p.ProductID and r.Process=p.ProcessId
+			where Date&gt;@begin and Date&lt;@end
+            </TEXT>
+            <Paramers>
+                <paramer name="@begin" value="begin" script=""/>
+                <paramer name="@end" value="end" script=""/>
+            </Paramers>
+        </SQL>
+		<!-- 添加输入项-->
+        <SQL id="ProductProvid.InsertInput" type="oledb">
+            <TEXT>
+			INSERT INTO [InputValue$](ProductID,Num,InputID,Value1,Value2) VALUES(@ProductID,@Number,@InputID,@Value1,@Value2)
+            </TEXT>
+            <Paramers>
+                <paramer name="@ProductID" value="ProductID" script=""/>
+                <paramer name="@Number" value="Number" script=""/>
+                <paramer name="@InputID" value="InputID" script=""/>
+                <paramer name="@Value1" value="Value1" script=""/>
+                <paramer name="@Value2" value="Value2" script=""/>
+            </Paramers>
+        </SQL>
+        <SQL id="ProductProvid.UpdateInput" type="oledb">
+            <TEXT>
+			Update [InputValue$] set Value1=@Value1, Value2=@Value2 where ProductID='{0}' and Num='{1}' and InputID='{2}'
+            </TEXT>
+            <Paramers>
+                <paramer name="@Value1" value="Value1" script=""/>
+                <paramer name="@Value2" value="Value2" script=""/>
+            </Paramers>
+        </SQL>
+    </MODULE>
+</SQL-List>
