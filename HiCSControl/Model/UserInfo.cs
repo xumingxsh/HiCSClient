@@ -4,6 +4,7 @@ namespace HiCSControl.Model
 {
     /// <summary>
     /// 用户信息
+    /// XuminRong 2016.04.15
     /// </summary>
     public sealed class UserInfo
     {

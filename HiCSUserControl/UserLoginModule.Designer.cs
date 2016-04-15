@@ -74,6 +74,7 @@
             // 
             // btnLogout
             // 
+            this.btnLogout.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLogout.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLogout.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnLogout.Location = new System.Drawing.Point(162, 199);
@@ -86,6 +87,7 @@
             // 
             // btnLogin
             // 
+            this.btnLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLogin.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btnLogin.ForeColor = System.Drawing.SystemColors.ControlText;
             this.btnLogin.Location = new System.Drawing.Point(9, 199);

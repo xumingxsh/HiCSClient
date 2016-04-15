@@ -9,6 +9,7 @@ namespace HiCSProvid
 {
     /// <summary>
     /// 产品数据提供类
+    /// XuminRong 2016.04.15
     /// </summary>
     public sealed class ProductProvid
     {
@@ -102,6 +103,15 @@ namespace HiCSProvid
             return DBHelper.ExecuteNoQuery("ProductProvid.InsertInput", dic) == 1;
         }
 
+        /// <summary>
+        /// 更新输入数据
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <param name="inputId"></param>
+        /// <param name="number"></param>
+        /// <param name="value1"></param>
+        /// <param name="value2"></param>
+        /// <returns></returns>
         public static bool UpdateInput(string productID, string inputId, int number, string value1, string value2)
         {
             Dictionary<string, string> dic = new Dictionary<string, string>();

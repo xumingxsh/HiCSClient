@@ -30,22 +30,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HiCSDB">
-      <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\lib\HiCSDB.dll</HintPath>
+    <Reference Include="HiCBO, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\lib\HiCBO.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Data">
-      <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\lib\MySql.Data.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
+    <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config\View.Designer.cs">
@@ -60,26 +56,9 @@
     <Compile Include="ProcessMaterial.Designer.cs">
       <DependentUpon>ProcessMaterial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Test\LoginModuleTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Test\LoginModuleTest.Designer.cs">
-      <DependentUpon>LoginModuleTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Test\ProcessMaterialTest1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Test\ProcessMaterialTest1.Designer.cs">
-      <DependentUpon>ProcessMaterialTest1.cs</DependentUpon>
-    </Compile>
     <Compile Include="Test\UnitTest_Login.cs" />
     <Compile Include="Test\UnitTest_ProcessMaterial.cs" />
-    <Compile Include="UserControl1.cs">
-      <SubType>UserControl</SubType>
-    </Compile>
-    <Compile Include="UserControl1.Designer.cs">
-      <DependentUpon>UserControl1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserLogin.cs">
       <SubType>Form</SubType>
@@ -99,12 +78,6 @@
   <ItemGroup>
     <EmbeddedResource Include="ProcessMaterial.resx">
       <DependentUpon>ProcessMaterial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\LoginModuleTest.resx">
-      <DependentUpon>LoginModuleTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Test\ProcessMaterialTest1.resx">
-      <DependentUpon>ProcessMaterialTest1.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UserLogin.resx">
       <DependentUpon>UserLogin.cs</DependentUpon>

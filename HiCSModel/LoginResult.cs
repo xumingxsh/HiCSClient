@@ -8,6 +8,7 @@ namespace HiCSModel
 {
     /// <summary>
     /// 登录结果
+    /// XuminRong 2016.04.15
     /// </summary>
     [Serializable]
     public sealed class LoginResult

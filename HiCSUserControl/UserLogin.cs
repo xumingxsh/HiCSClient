@@ -7,8 +7,14 @@ using HiCSCommonControl.Util;
 
 namespace HiCSUserControl
 {
-    public partial class UserLogin : Form
+    /// <summary>
+    /// 用户登录界面
+    /// </summary>
+    partial class UserLogin : Form
     {
+        /// <summary>
+        /// 用户管理对象
+        /// </summary>
         public UserLoginControl Control { set; get; }
 
         public bool IsOK { set; get; }
@@ -51,7 +57,7 @@ namespace HiCSUserControl
             }
             MsgBoxHelper.Error("登录失败，请重试！");
         }
-        FormWrap wrap = new FormWrap();
 
+        FormWrap wrap = new FormWrap();
     }
 }

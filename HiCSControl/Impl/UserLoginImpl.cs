@@ -12,8 +12,14 @@ using HiCSControl.Model;
 
 namespace HiCSControl.Impl
 {
+    /// <summary>
+    /// 用户登录接口实现
+    /// </summary>
     sealed class UserLoginImpl
     {
+        /// <summary>
+        /// 当前所有用户
+        /// </summary>
         public BindingList<UserInfo> Users
         {
             get
@@ -22,6 +28,11 @@ namespace HiCSControl.Impl
             }
         }
 
+        /// <summary>
+        /// 根据产品取得所有工序
+        /// </summary>
+        /// <param name="productID"></param>
+        /// <returns></returns>
         public List<ProcessInfo> GetProcess(string productID)
         {
             List<ProcessInfo> lst = new List<ProcessInfo>();
@@ -38,6 +49,9 @@ namespace HiCSControl.Impl
             return lst;
         }
 
+        /// <summary>
+        /// 用户登录总数
+        /// </summary>
         public int UserCount
         {
             get
@@ -46,19 +60,35 @@ namespace HiCSControl.Impl
             }
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="user"></param>
+        /// <param name="pwd"></param>
+        /// <returns></returns>
         public bool Login(string user, string pwd)
         {
             LoginResult result = UserProvid.Login(user, pwd);
             return OnLogin(result);
         }
 
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="rfid"></param>
+        /// <returns></returns>
         public bool Login(string rfid)
         {
             LoginResult result = UserProvid.Login(rfid);
             return OnLogin(result);
         }
 
-        public bool OnLogin(LoginResult result)
+        /// <summary>
+        /// 注销处理
+        /// </summary>
+        /// <param name="result"></param>
+        /// <returns></returns>
+        private bool OnLogin(LoginResult result)
         {
             if (!result.IsOK)
             {
@@ -81,6 +111,11 @@ namespace HiCSControl.Impl
             users.Add(info);
             return true;
         }
+
+        /// <summary>
+        /// 注销
+        /// </summary>
+        /// <param name="userId"></param>
         public void Logout(string userId)
         {
             foreach (UserInfo it in users)
@@ -93,6 +128,9 @@ namespace HiCSControl.Impl
             }
         }
 
+        /// <summary>
+        /// 全部注销
+        /// </summary>
         public void Logout()
         {
             users.Clear();

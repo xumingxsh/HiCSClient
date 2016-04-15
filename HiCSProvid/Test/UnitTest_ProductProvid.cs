@@ -11,9 +11,16 @@ using HiCSDB;
 
 namespace HiCSProvid.Test
 {
+    /// <summary>
+    /// 产品数据处理测试类
+    /// XuminRong 2016.04.15
+    /// </summary>
     [TestClass]
     public class UnitTest_ProductProvid
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public UnitTest_ProductProvid()
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
@@ -28,6 +35,9 @@ data source=" + path + "/edqdb.xls";
             ProvidConfig.DBType = DBOperate.OLEDB;
         }
 
+        /// <summary>
+        /// 测试产品工序
+        /// </summary>
         [TestMethod]
         public void GetProductProcesses_excel()
         {
@@ -36,6 +46,9 @@ data source=" + path + "/edqdb.xls";
             WriteLog(DataTable2String(dt));
         }
 
+        /// <summary>
+        /// 测试产品物料
+        /// </summary>
         [TestMethod]
         public void GetProductProcessMaterial_excel()
         {
@@ -44,6 +57,9 @@ data source=" + path + "/edqdb.xls";
             WriteLog(DataTable2String(dt));
         }
 
+        /// <summary>
+        /// 测试获得输入项
+        /// </summary>
         [TestMethod]
         public void GetProcessInput_excel()
         {
@@ -51,6 +67,10 @@ data source=" + path + "/edqdb.xls";
             Assert.IsTrue(dt != null && dt.Rows.Count > 1);
             WriteLog(DataTable2String(dt));
         }
+
+        /// <summary>
+        /// 测试添加输入项数据
+        /// </summary>
         [TestMethod]
         public void InsertInput_excel()
         {
@@ -62,6 +82,9 @@ data source=" + path + "/edqdb.xls";
             DBHelper.ExecuteNoQuery8SQL("update [InputValue$] set ProductID=null,Num=null, InputID=null, value1=null,value2=null where ProductID='P1' and Num='1' and InputID='1'");
         }
 
+        /// <summary>
+        /// 测试更新输入向数据
+        /// </summary>
         [TestMethod]
         public void UpdateInput_excel()
         {
@@ -77,6 +100,9 @@ data source=" + path + "/edqdb.xls";
             DBHelper.ExecuteNoQuery8SQL("update [InputValue$] set ProductID=null,Num=null, InputID=null, value1=null,value2=null where ProductID='P1' and Num='1' and InputID='1'");
         }
 
+        /// <summary>
+        /// 测试取得产品计划
+        /// </summary>
         [TestMethod]
         public void GetPlan_excel()
         {
@@ -85,6 +111,9 @@ data source=" + path + "/edqdb.xls";
             WriteLog(DataTable2String(dt));
         }
 
+        /// <summary>
+        /// 测试产品进度
+        /// </summary>
         [TestMethod]
         public void GetProductState_excel()
         {

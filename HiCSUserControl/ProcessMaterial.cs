@@ -16,7 +16,7 @@ namespace HiCSUserControl
         }
 
 
-        public delegate void OnDbClickHandle(string productID, string processID, string materialID);
+        public delegate void OnDbClickHandle(Material material);
 
         private OnDbClickHandle dbHandler = null;
         public void SetDbClick(OnDbClickHandle evt)
@@ -63,11 +63,6 @@ namespace HiCSUserControl
             dgvHelper.OnResize();
         }
 
-        string productID;
-        string processID;
-
-        DGViewHelper dgvHelper = new DGViewHelper();
-
         private void dgvMaterial_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             if (dbHandler == null)
@@ -75,10 +70,20 @@ namespace HiCSUserControl
                 return;
             }
             int index = e.RowIndex;
-            string pdeID = Convert.ToString(dgvMaterial.Rows[index].Cells[3].Value);
-            string prsID = Convert.ToString(dgvMaterial.Rows[index].Cells[4].Value);
-            string materialId = Convert.ToString(dgvMaterial.Rows[index].Cells[5].Value);
-            dbHandler(pdeID, prsID, materialId);
+
+            Material material = new Material();
+            HiCBO.CBO.FillObject<Material>(material, (ref object objValue, string name) =>
+                {
+                    objValue = dgvHelper.GetCellValue(index, name);
+                    return true;
+                });
+
+            dbHandler(material);
         }
+
+        string productID;
+        string processID;
+
+        DGViewHelper dgvHelper = new DGViewHelper();
     }
 }

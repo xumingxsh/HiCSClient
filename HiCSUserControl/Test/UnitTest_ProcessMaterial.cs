@@ -1,17 +1,22 @@
 ﻿using System;
 using System.IO;
-using System.Windows.Forms;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using HiCSProvid;
-using HiCSDB;
 using HiCSUserControl;
 
 namespace HiCSUserControl.Test
 {
+    /// <summary>
+    /// 进程物料界面测试程序
+    /// 注:当前还不掌握UI测试技术,故该类尚未实现,放置在此处占位置
+    /// XuminRong 2016.04.15
+    /// </summary>
     [TestClass]
     public class UnitTest_ProcessMaterial
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public UnitTest_ProcessMaterial()
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
@@ -19,19 +24,11 @@ namespace HiCSUserControl.Test
             topDir = System.IO.Directory.GetParent(topDir.FullName);
             topDir = System.IO.Directory.GetParent(topDir.FullName);
             path = topDir.FullName + "/Excel";
-            ProvidConfig.Conn = @"Provider=Microsoft.Jet.OLEDB.4.0;
+            string conn = @"Provider=Microsoft.Jet.OLEDB.4.0;
 Extended Properties=Excel 8.0;
 data source=" + path + "/edqdb.xls";
-            ProvidConfig.XMLFolder = path + "/xmls";
-            ProvidConfig.DBType = DBOperate.OLEDB;
-        }
 
-        [TestMethod]
-        public void ProcessMaterial_Init()
-        {
-            //Application.EnableVisualStyles();
-            //Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new ProcessMaterialTest1());
+            UserConfig.Init(2, conn, path + "/xmls");
         }
     }
 }

@@ -12,6 +12,7 @@ namespace HiCSControl.Control
 {
     /// <summary>
     /// 登录模块接口
+    /// XuminRong 2016.04.15
     /// </summary>
     public sealed class UserLoginControl
     {

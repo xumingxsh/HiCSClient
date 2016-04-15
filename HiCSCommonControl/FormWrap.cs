@@ -2,19 +2,48 @@
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+
 using HiCSCommonControl.Util;
 
 namespace HiCSCommonControl
 {
+    /// <summary>
+    /// 列信息类
+    /// 该类应该为FormWrap的内部类,
+    /// 但是内部类和inneral无法使用jsaon转换,所以定义为public
+    /// XuminRong 2016.04.15
+    /// </summary>
     public sealed class ControlInfo
     {
+        /// <summary>
+        /// 控件ID
+        /// </summary>
         public string ID { get; set; }
+
+        /// <summary>
+        /// 是否允许为空
+        /// </summary>
         public bool CanNull { get; set; }
+
+        /// <summary>
+        /// 正则表达式
+        /// </summary>
         public string Reg { get; set; }
+
+        /// <summary>
+        /// 错误提示信息
+        /// </summary>
         public string Err { get; set; }
     }
+
+    /// <summary>
+    /// 窗体控件处理类
+    /// XuminRong 2016.04.15
+    /// </summary>
     public sealed class FormWrap
     {
+        static System.Drawing.Color WarnColor = System.Drawing.Color.Yellow;
+        static System.Drawing.Color NormalColor = System.Drawing.Color.White;
 
         Dictionary<string, ControlInfo> controlValidite = new Dictionary<string, ControlInfo>();
         Dictionary<string, Control> controls = new Dictionary<string, Control>();
@@ -74,6 +103,7 @@ namespace HiCSCommonControl
             TextBox box = control as TextBox;
             if (box != null && !validite.CanNull && control.Text.Trim().Length < 2)
             {
+                control.BackColor = WarnColor;
                 control.Focus();
                 throw new Exception(validite.Err);
             }
@@ -125,7 +155,17 @@ namespace HiCSCommonControl
         {
             if (control is TextBox)
             {
+                control.KeyDown += control_KeyDown;
                 //control.KeyPress += OnKeyPress;
+            }
+        }
+
+        private void control_KeyDown(object sender, KeyEventArgs e)
+        {
+            TextBox box = sender as TextBox;
+            if (box != null && box.BackColor == WarnColor)
+            {
+                box.BackColor = NormalColor;
             }
         }
 

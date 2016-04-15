@@ -33,9 +33,12 @@
             // 
             // uiLogin
             // 
-            this.uiLogin.Location = new System.Drawing.Point(0, 0);
+            this.uiLogin.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.uiLogin.Location = new System.Drawing.Point(118, 100);
             this.uiLogin.Name = "uiLogin";
-            this.uiLogin.Size = new System.Drawing.Size(301, 265);
+            this.uiLogin.Size = new System.Drawing.Size(311, 273);
             this.uiLogin.TabIndex = 0;
             // 
             // Login

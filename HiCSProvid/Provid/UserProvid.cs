@@ -8,6 +8,7 @@ namespace HiCSProvid
 {
     /// <summary>
     /// 用户数据提供类
+    /// XuminRong 2016.04.15
     /// </summary>
     public sealed class UserProvid
     {

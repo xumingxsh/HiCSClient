@@ -7,6 +7,10 @@ using HiCSDB;
 
 namespace HiCSProvid.Util
 {
+    /// <summary>
+    /// 数据库访问类
+    /// XuminRong 2016.04.15
+    /// </summary>
     class DBHelper
     {
         static DBOperate db = null;

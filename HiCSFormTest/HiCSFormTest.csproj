@@ -32,37 +32,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HiCSCommonControl">
-      <HintPath>..\HiCSCommonControl\bin\Debug\HiCSCommonControl.dll</HintPath>
-    </Reference>
-    <Reference Include="HiCSControl">
-      <HintPath>..\HiCSControl\bin\Debug\HiCSControl.dll</HintPath>
-    </Reference>
-    <Reference Include="HiCSDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\lib\HiCSDB.dll</HintPath>
-    </Reference>
-    <Reference Include="HiCSProvid">
-      <HintPath>..\HiCSProvid\bin\Debug\HiCSProvid.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\lib\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="OutWardUserControl">
-      <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\OutWardUserControl\bin\Debug\OutWardUserControl.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Windows.Forms" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Form1.cs">
@@ -126,6 +101,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\HiCSCommonControl\HiCSCommonControl.csproj">
+      <Project>{eee5c22e-bc57-4cde-8921-fdf57048ddae}</Project>
+      <Name>HiCSCommonControl</Name>
+    </ProjectReference>
     <ProjectReference Include="..\HiCSModel\HiCSModel.csproj">
       <Project>{ba91ee53-3d9e-4672-8f91-6336fa25e858}</Project>
       <Name>HiCSModel</Name>

@@ -169,9 +169,59 @@ namespace HiCSCommonControl
             {
                 it.Control.HeaderText = it.Column.ColumnText;
                 it.Control.DataPropertyName = it.Column.ColumnName;
+                it.Control.Name = it.Column.ColumnID;
             }
             SetWidth();
             return true;
+        }
+
+        /// <summary>
+        /// 取得视图某行某列的值
+        /// </summary>
+        /// <param name="rowIndex"></param>
+        /// <param name="cellIndex"></param>
+        /// <returns></returns>
+        public string GetCellValue(int rowIndex, int cellIndex)
+        {
+            if (myDGV == null)
+            {
+                return null;
+            }
+            if (rowIndex >= myDGV.Rows.Count)
+            {
+                return null;
+            }
+            if (cellIndex >= myDGV.ColumnCount)
+            {
+                return null;
+            }
+            return Convert.ToString(myDGV.Rows[rowIndex].Cells[cellIndex].Value);
+        }
+
+        /// <summary>
+        /// 取得视图某行某列的值
+        /// </summary>
+        /// <param name="rowIndex"></param>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
+        public string GetCellValue(int rowIndex, string columnName)
+        {
+            if (myDGV == null)
+            {
+                return null;
+            }
+            if (rowIndex >= myDGV.Rows.Count)
+            {
+                return null;
+            }
+
+            if (!myDGV.Columns.Contains(columnName))
+            {
+                return null;
+            }
+
+            int cellIndex = myDGV.Columns[columnName].Index;
+            return GetCellValue(rowIndex, cellIndex);
         }
 
         /// <summary>

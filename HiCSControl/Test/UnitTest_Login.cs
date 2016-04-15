@@ -7,16 +7,21 @@ using System.IO;
 using System.ComponentModel;
 
 using HiCSProvid;
-using HiCSDB;
 
 using HiCSControl.Model;
 using HiCSControl.Control;
 
 namespace HiCSControl.Test
 {
+    /// <summary>
+    /// 登录模块测试类
+    /// </summary>
     [TestClass]
     public class UnitTest_Login
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public UnitTest_Login()
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
@@ -28,9 +33,12 @@ namespace HiCSControl.Test
 Extended Properties=Excel 8.0;
 data source=" + path + "/edqdb.xls";
             ProvidConfig.XMLFolder = path + "/xmls";
-            ProvidConfig.DBType = DBOperate.OLEDB;
+            ProvidConfig.DBType = 2;
         }
 
+        /// <summary>
+        /// 获得工序测试
+        /// </summary>
         [TestMethod]
         public void UserLoginControl_GetProcess()
         {
@@ -39,6 +47,9 @@ data source=" + path + "/edqdb.xls";
             Assert.IsTrue(lst.Count > 0);
         }
 
+        /// <summary>
+        /// 登录测试
+        /// </summary>
         [TestMethod]
         public void UserLoginControl_Login()
         {

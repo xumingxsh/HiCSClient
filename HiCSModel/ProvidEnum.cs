@@ -8,11 +8,13 @@ namespace HiCSModel
 {
     /// <summary>
     /// 生产相关枚举
+    /// XuminRong 2016.04.15
     /// </summary>
     public static class ProvidEnum
     {
         /// <summary>
         /// 工序类型
+        /// XuminRong 2016.04.15
         /// </summary>
         public enum ProcessType
         {
@@ -23,6 +25,7 @@ namespace HiCSModel
 
         /// <summary>
         /// 工序操作类型
+        /// XuminRong 2016.04.15
         /// </summary>
         public enum PreocessOper
         {
@@ -33,6 +36,7 @@ namespace HiCSModel
 
         /// <summary>
         /// 物料类型
+        /// XuminRong 2016.04.15
         /// </summary>
         public enum MaterialType
         {
@@ -44,6 +48,7 @@ namespace HiCSModel
 
         /// <summary>
         /// 输入项
+        /// XuminRong 2016.04.15
         /// </summary>
         public enum InputType
         {
@@ -53,6 +58,7 @@ namespace HiCSModel
 
         /// <summary>
         /// 初始化类型
+        /// XuminRong 2016.04.15
         /// </summary>
         public enum InputInit
         {

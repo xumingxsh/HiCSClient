@@ -6,7 +6,11 @@ using System.Runtime.Serialization.Json;
 
 namespace HiCSCommonControl.Util
 {
-    static class JsonHelper
+    /// <summary>
+    /// JSON字符串处理类
+    /// XuminRong 2016.04.15
+    /// </summary>
+    public static class JsonHelper
     {
         /// <summary>
         /// 根据Json字符串获得对象

@@ -1,12 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.IO;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-using HiCSProvid;
-using HiCSDB;
 
 namespace HiCSFormTest
 {
@@ -24,11 +19,12 @@ namespace HiCSFormTest
             topDir = System.IO.Directory.GetParent(topDir.FullName);
             topDir = System.IO.Directory.GetParent(topDir.FullName);
             path = topDir.FullName + "/Excel";
-            ProvidConfig.Conn = @"Provider=Microsoft.Jet.OLEDB.4.0;
+            string conn = @"Provider=Microsoft.Jet.OLEDB.4.0;
 Extended Properties=Excel 8.0;
 data source=" + path + "/edqdb.xls";
-            ProvidConfig.XMLFolder = path + "/xmls";
-            ProvidConfig.DBType = DBOperate.OLEDB;
+
+
+            HiCSUserControl.UserConfig.Init(2, conn, path + "/xmls");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
