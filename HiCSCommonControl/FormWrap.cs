@@ -122,7 +122,7 @@ namespace HiCSCommonControl
             {
                 return;
             }
-            controlsInfo = JsonHelper.Json2Obj<List<ControlInfo>>(json);
+            controlsInfo = HiCSUtil.Json.Json2Obj<List<ControlInfo>>(json);
             foreach (ControlInfo it in controlsInfo)
             {
                 controlValidite.Add(it.ID, it);

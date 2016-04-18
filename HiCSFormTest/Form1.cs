@@ -27,5 +27,11 @@ namespace HiCSFormTest
             ProcessMaterial_DBClick form = new ProcessMaterial_DBClick();
             form.Show();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            Login2 form = new Login2();
+            form.Show();
+        }
     }
 }

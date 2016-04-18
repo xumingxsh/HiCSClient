@@ -72,7 +72,7 @@ namespace HiCSUserControl
             int index = e.RowIndex;
 
             Material material = new Material();
-            HiCBO.CBO.FillObject<Material>(material, (ref object objValue, string name) =>
+            HiCSUtil.CBO.FillObject<Material>(material, (ref object objValue, string name) =>
                 {
                     objValue = dgvHelper.GetCellValue(index, name);
                     return true;

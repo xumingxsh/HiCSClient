@@ -15,7 +15,7 @@ namespace HiCSFormTest
             processMaterial1.SetProcess("P1", "1");
             processMaterial1.SetDbClick((HiCSModel.Material material) =>
             {
-                string text = HiCSCommonControl.Util.JsonHelper.Obj2Json<HiCSModel.Material>(material);
+                string text = HiCSUtil.Json.Obj2Json<HiCSModel.Material>(material);
                 HiCSCommonControl.Util.MsgBoxHelper.Notiy(text);
             });
         }

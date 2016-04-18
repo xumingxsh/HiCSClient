@@ -8,7 +8,7 @@ using HiCSProvid;
 using HiCSControl.Model;
 
 
-namespace HiCSControl.Impl
+namespace HiCSUserControl
 {
     /// <summary>
     /// 用户登录接口实现
@@ -34,7 +34,7 @@ namespace HiCSControl.Impl
         public List<ProcessInfo> GetProcess(string productID)
         {
             List<ProcessInfo> lst = new List<ProcessInfo>();
-            DataTable dt = ProductProvid.GetProductProcesses(productID);
+            DataTable dt = DBHelper.ExecuteQuery("ProductProvid.GetProductProcesses_parm1", productID);
             foreach(DataRow dr in dt.Rows)
             {
                 ProcessInfo info = new ProcessInfo();
@@ -73,8 +73,8 @@ namespace HiCSControl.Impl
         /// <returns></returns>
         public bool Login(string user, string pwd)
         {
-            LoginResult result = UserProvid.Login(user, pwd);
-            return OnLogin(result);
+            DataTable dt = DBHelper.ExecuteQuery("User.Login_param2", user, pwd);
+            return OnLogin(dt);
         }
 
         /// <summary>
@@ -84,8 +84,8 @@ namespace HiCSControl.Impl
         /// <returns></returns>
         public bool Login(string rfid)
         {
-            LoginResult result = UserProvid.Login(rfid);
-            return OnLogin(result);
+            DataTable dt = DBHelper.ExecuteQuery(rfid);
+            return OnLogin(dt);
         }
 
         /// <summary>
@@ -93,16 +93,28 @@ namespace HiCSControl.Impl
         /// </summary>
         /// <param name="result"></param>
         /// <returns></returns>
-        private bool OnLogin(LoginResult result)
+        private bool OnLogin(DataTable dt)
         {
-            if (!result.IsOK)
+            if (dt.Rows.Count != 1)
             {
                 return false;
             }
 
             UserInfo info = new UserInfo();
-            info.UserID = result.UserID;
-            info.UserName = result.UserName;
+            DataRow dr = dt.Rows[0];
+            HiCSUtil.CBO.FillObject<UserInfo>(info, (string name) =>
+            {
+                if (name == "UserName")
+                {
+                    name = "Name";
+                }
+                if (!dr.Table.Columns.Contains(name))
+                {
+                    return null;
+                }
+                return dr[name];
+            });
+
             info.LoginTime = DateTime.Now;
 
             foreach (UserInfo it in users)

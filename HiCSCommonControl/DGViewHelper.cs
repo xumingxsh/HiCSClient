@@ -89,7 +89,7 @@ namespace HiCSCommonControl
         /// <returns></returns>
         public bool Init(ContainerControl form, DataGridView dgv, string json)
         {
-            List<DGVColumnInfo> lst = JsonHelper.Json2Obj<List<DGVColumnInfo>>(json);
+            List<DGVColumnInfo> lst = HiCSUtil.Json.Json2Obj<List<DGVColumnInfo>>(json);
             return Init(form, dgv, lst);
         }
 
