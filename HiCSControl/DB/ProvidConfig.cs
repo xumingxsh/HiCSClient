@@ -2,7 +2,7 @@
 
 using HiCSSQL;
 
-namespace HiCSProvid
+namespace HiCSControl
 {
     /// <summary>
     /// 数据库相关配置类

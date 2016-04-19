@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace HiCSCommonControl.Util
+namespace HiCSUserControl.Test
 {
     /// <summary>
     /// DGViewHelper单元测试类

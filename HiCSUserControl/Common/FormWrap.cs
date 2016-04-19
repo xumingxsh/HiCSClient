@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-using HiCSCommonControl.Util;
 
-namespace HiCSCommonControl
+namespace HiCSUserControl.Common
 {
     /// <summary>
     /// 列信息类

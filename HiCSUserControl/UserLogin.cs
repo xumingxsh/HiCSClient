@@ -1,9 +1,8 @@
 ﻿using System;
 using System.Windows.Forms;
 
-using HiCSControl.Control;
-using HiCSCommonControl;
-using HiCSCommonControl.Util;
+using HiCSControl;
+using HiCSUserControl.Common;
 
 namespace HiCSUserControl
 {
@@ -17,8 +16,15 @@ namespace HiCSUserControl
         /// </summary>
         public UserLoginControl Control { set; get; }
 
+        /// <summary>
+        /// 是否登录成功
+        /// </summary>
         public bool IsOK { set; get; }
 
+        /// <summary>
+        /// 构造函数
+        /// </summary>
+        /// <param name="ctrl"></param>
         public UserLogin(UserLoginControl  ctrl)
         {
             InitializeComponent();

@@ -2,34 +2,63 @@
 using System.Data;
 using System.Windows.Forms;
 
-using HiCSProvid;
 using HiCSModel;
-using HiCSCommonControl;
+using HiCSUserControl.Common;
 
 namespace HiCSUserControl
 {
+    /// <summary>
+    /// 物料列表
+    /// </summary>
     public partial class ProcessMaterial : UserControl
     {
+        /// <summary>
+        /// 构造函数
+        /// </summary>
         public ProcessMaterial()
         {
             InitializeComponent();
         }
 
-
+        /// <summary>
+        /// 双击事件
+        /// </summary>
+        /// <param name="material"></param>
         public delegate void OnDbClickHandle(Material material);
 
         private OnDbClickHandle dbHandler = null;
+
+        /// <summary>
+        /// 设置双击事件
+        /// </summary>
+        /// <param name="evt"></param>
         public void SetDbClick(OnDbClickHandle evt)
         {
             dbHandler = evt;
         }
 
+        private DataTable GetMaterials(ProvidEnum.MaterialType type = ProvidEnum.MaterialType.Main)
+        {
+            string condition = "";
+            if (type != ProvidEnum.MaterialType.All)
+            {
+                condition = " and MType='" + Convert.ToInt16(type) + "'";
+            }
+            return HiCSControl.DBHelper.ExecuteQuery("ProductProvid.GetProductProcessMaterial_parm3", productID, processID, condition);
+        }
+
+        /// <summary>
+        /// 设置工序
+        /// </summary>
+        /// <param name="pdeID"></param>
+        /// <param name="prsID"></param>
+        /// <param name="type"></param>
         public void SetProcess(string pdeID, string prsID, ProvidEnum.MaterialType type = ProvidEnum.MaterialType.Main)
         {
             productID = pdeID;
             processID = prsID;
 
-            DataTable dtMaterial = ProductProvid.GetProcessMaterial(productID, processID);
+            DataTable dtMaterial = GetMaterials(type);
 
             if (dtMaterial == null)
             {
@@ -43,12 +72,21 @@ namespace HiCSUserControl
 
             dgvMaterial.DataSource = dv;
         }
+
+        /// <summary>
+        /// 设置工序
+        /// </summary>
+        /// <param name="prsID"></param>
+        /// <param name="type"></param>
         public void SetProcess(string prsID, ProvidEnum.MaterialType type = ProvidEnum.MaterialType.Main)
         {
             SetProcess(productID, prsID, type);
         }
 
-
+        /// <summary>
+        /// 设置工序
+        /// </summary>
+        /// <param name="type"></param>
         public void SetProcess(ProvidEnum.MaterialType type = ProvidEnum.MaterialType.Main)
         {
             SetProcess(productID, processID, type);

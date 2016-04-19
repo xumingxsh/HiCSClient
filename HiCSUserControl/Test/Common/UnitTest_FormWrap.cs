@@ -3,9 +3,9 @@ using System.Windows.Forms;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using HiCSCommonControl;
+using HiCSUserControl.Common;
 
-namespace HiCSCommonControl.Test
+namespace HiCSUserControl.Test
 {
     /// <summary>
     /// FormWrap单元测试类

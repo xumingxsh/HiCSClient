@@ -14,7 +14,7 @@ namespace HiCSFormTest
         {
             uiLogin.Init();
             uiLogin.SetNotify(() => {
-                HiCSCommonControl.Util.MsgBoxHelper.Notiy("所有用户都注销了,需要关闭未完成的工序!");
+                HiCSUserControl.Common.MsgBoxHelper.Notiy("所有用户都注销了,需要关闭未完成的工序!");
             });
         }
     }

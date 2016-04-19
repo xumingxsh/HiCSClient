@@ -5,13 +5,13 @@ using System.Collections.Generic;
 using HiCSSQL;
 using HiCSDB;
 
-namespace HiCSProvid.Util
+namespace HiCSControl
 {
     /// <summary>
     /// 数据库访问类
     /// XuminRong 2016.04.15
     /// </summary>
-    class DBHelper
+    public class DBHelper
     {
         static DBOperate db = null;
 
@@ -129,6 +129,10 @@ namespace HiCSProvid.Util
 
         private static DataTable ExcelDataTable(DataTable dt)
         {
+            if (ProvidConfig.DBType != DBOperate.OLEDB)
+            {
+                return dt;
+            }
             DataTable dtNew = new DataTable();
             foreach(DataColumn cl in dt.Columns)
             {

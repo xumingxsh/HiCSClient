@@ -57,12 +57,6 @@
     <Compile Include="Login.Designer.cs">
       <DependentUpon>Login.cs</DependentUpon>
     </Compile>
-    <Compile Include="Login2.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Login2.Designer.cs">
-      <DependentUpon>Login2.cs</DependentUpon>
-    </Compile>
     <Compile Include="ProcessMaterial.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -82,9 +76,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Login.resx">
       <DependentUpon>Login.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Login2.resx">
-      <DependentUpon>Login2.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProcessMaterial.resx">
       <DependentUpon>ProcessMaterial.cs</DependentUpon>
@@ -115,10 +106,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\HiCSCommonControl\HiCSCommonControl.csproj">
-      <Project>{eee5c22e-bc57-4cde-8921-fdf57048ddae}</Project>
-      <Name>HiCSCommonControl</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HiCSModel\HiCSModel.csproj">
       <Project>{ba91ee53-3d9e-4672-8f91-6336fa25e858}</Project>
       <Name>HiCSModel</Name>

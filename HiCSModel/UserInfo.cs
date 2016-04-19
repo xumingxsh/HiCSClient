@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HiCSControl.Model
+namespace HiCSModel
 {
     /// <summary>
     /// 用户信息

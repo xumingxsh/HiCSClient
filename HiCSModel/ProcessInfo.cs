@@ -2,7 +2,7 @@
 
 using HiCSModel;
 
-namespace HiCSControl.Model
+namespace HiCSModel
 {
     /// <summary>
     /// 工序信息

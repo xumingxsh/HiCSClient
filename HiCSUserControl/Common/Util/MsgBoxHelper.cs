@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace HiCSCommonControl.Util
+namespace HiCSUserControl.Common
 {
     /// <summary>
     /// 消息提示类

@@ -1,14 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Data;
 
 using HiCSModel;
 
-using HiCSControl.Model;
-
-using HiCSControl.Impl;
-
-namespace HiCSControl.Control
+namespace HiCSControl
 {
     /// <summary>
     /// 登录模块接口
@@ -22,23 +19,13 @@ namespace HiCSControl.Control
         public ProcessInfo CurProcess {set; get;}
 
         /// <summary>
-        /// 产品的所有进程
-        /// </summary>
-        /// <param name="productID"></param>
-        /// <returns></returns>
-        public List<ProcessInfo> GetProcess(string productID)
-        {
-            return impl.GetProcess(productID);
-        }
-
-        /// <summary>
         /// 取得所有登录当前客户端的用户
         /// </summary>
         public BindingList<UserInfo> LoginUsers
         {
             get
             {
-                return impl.Users;
+                return users;
             }
         }
 
@@ -49,7 +36,7 @@ namespace HiCSControl.Control
         {
             get
             {
-                return impl.UserCount;
+                return users.Count;
             }
         }
 
@@ -61,7 +48,8 @@ namespace HiCSControl.Control
         /// <returns></returns>
         public bool Login(string user, string pwd)
         {
-            return impl.Login(user, pwd);
+            DataTable dt = DBHelper.ExecuteQuery("User.Login_param2", user, pwd);
+            return OnLogin(dt);
         }
 
         /// <summary>
@@ -71,7 +59,44 @@ namespace HiCSControl.Control
         /// <returns></returns>
         public bool Login(string rfid)
         {
-            return impl.Login(rfid);
+            DataTable dt = DBHelper.ExecuteQuery(rfid);
+            return OnLogin(dt);
+        }
+
+        private bool OnLogin(DataTable dt)
+        {
+            if (dt == null || dt.Rows.Count != 1)
+            {
+                return false;
+            }
+
+            UserInfo info = new UserInfo();
+            DataRow dr = dt.Rows[0];
+            HiCSUtil.CBO.FillObject<UserInfo>(info, (string name) =>
+            {
+                if (name == "UserName")
+                {
+                    name = "Name";
+                }
+                if (!dr.Table.Columns.Contains(name))
+                {
+                    return null;
+                }
+                return dr[name];
+            });
+
+            info.LoginTime = DateTime.Now;
+
+            foreach (UserInfo it in users)
+            {
+                if (it.UserID.Equals(info.UserID))
+                {
+                    return true;
+                }
+            }
+
+            users.Add(info);
+            return true;
         }
 
         /// <summary>
@@ -80,7 +105,14 @@ namespace HiCSControl.Control
         /// <param name="userId"></param>
         public void Logout(string userId)
         {
-            impl.Logout(userId);
+            foreach (UserInfo it in users)
+            {
+                if (it.UserID.Equals(userId))
+                {
+                    users.Remove(it);
+                    break;
+                }
+            }
         }
 
         /// <summary>
@@ -88,9 +120,10 @@ namespace HiCSControl.Control
         /// </summary>
         public void Logout()
         {
-            impl.Logout();
+            users.Clear();
         }
 
-        UserLoginImpl impl = new UserLoginImpl();
+
+        BindingList<UserInfo> users = new BindingList<UserInfo>();
     }
 }

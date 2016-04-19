@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Data;
 using System.Windows.Forms;
 using System.ComponentModel;
 
-using HiCSControl.Control;
-using HiCSControl.Model;
+using HiCSControl;
+using HiCSModel;
 
-using HiCSCommonControl;
-using HiCSCommonControl.Util;
+using HiCSUserControl.Common;
 
 namespace HiCSUserControl
 {
@@ -33,7 +32,7 @@ namespace HiCSUserControl
         public void Init()
         {
             dgvLoginUser.DataSource = control.LoginUsers;
-            List<ProcessInfo> processes = control.GetProcess("P1");
+            DataTable processes = DBHelper.ExecuteQuery("ProductProvid.GetProductProcesses_parm1", "P1");
             cbProcesses.DataSource = processes;
             cbProcesses.DisplayMember = "Name";
             cbProcesses.ValueMember = "ProcessId";

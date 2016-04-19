@@ -1,15 +1,10 @@
 ﻿using System;
-using System.Data;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Diagnostics;
 using System.IO;
-using System.ComponentModel;
 
-using HiCSProvid;
-
-using HiCSControl.Model;
-using HiCSControl.Control;
+using HiCSControl;
+using HiCSModel;
 
 namespace HiCSControl.Test
 {
@@ -29,23 +24,22 @@ namespace HiCSControl.Test
             topDir = System.IO.Directory.GetParent(topDir.FullName);
             topDir = System.IO.Directory.GetParent(topDir.FullName);
             path = topDir.FullName + "/Excel"; 
-            ProvidConfig.Conn = @"Provider=Microsoft.Jet.OLEDB.4.0;
+            string conn = @"Provider=Microsoft.Jet.OLEDB.4.0;
 Extended Properties=Excel 8.0;
 data source=" + path + "/edqdb.xls";
-            ProvidConfig.XMLFolder = path + "/xmls";
-            ProvidConfig.DBType = 2;
+            UserConfig.Init(2, conn, path + "/xmls");
         }
 
-        /// <summary>
-        /// 获得工序测试
-        /// </summary>
-        [TestMethod]
-        public void UserLoginControl_GetProcess()
-        {
-            UserLoginControl control = new UserLoginControl();
-            List<ProcessInfo> lst = control.GetProcess("P1");
-            Assert.IsTrue(lst.Count > 0);
-        }
+        ///// <summary>
+        ///// 获得工序测试
+        ///// </summary>
+        //[TestMethod]
+        //public void UserLoginControl_GetProcess()
+        //{
+        //    UserLoginControl control = new UserLoginControl();
+        //    List<ProcessInfo> lst = control.GetProcess("P1");
+        //    Assert.IsTrue(lst.Count > 0);
+        //}
 
         /// <summary>
         /// 登录测试
