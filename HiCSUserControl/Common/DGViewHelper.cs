@@ -40,6 +40,11 @@ namespace HiCSUserControl.Common
         public short WidthPercent { get; set; }
 
         /// <summary>
+        /// 固定宽度
+        /// </summary>
+        public short Width { get; set; }
+
+        /// <summary>
         /// 对齐方式
         /// </summary>
         public string Align { set; get; }
@@ -410,9 +415,33 @@ namespace HiCSUserControl.Common
                 myDGV.Columns.Add(checkColumn);
             }
 
+            int pinWidth = 0;
+
             foreach (var it in clsList)
             {
-                it.Control.Width = (width * it.Column.WidthPercent) / 100;
+                if (it.Column.Width > 0)
+                {
+                    pinWidth += it.Column.Width;
+                }
+            }
+
+            width -= pinWidth;
+
+            if (width < 0)
+            {
+                width = myDGV.Size.Width; 
+            }
+
+            foreach (var it in clsList)
+            {
+                if (it.Column.Width > 0)
+                {
+                    it.Control.Width = it.Column.Width;
+                }
+                else
+                {
+                    it.Control.Width = (width * it.Column.WidthPercent) / 100;
+                }
                 it.Control.DisplayIndex = it.DipplayIndex + startIndex;
                 if (it.Column.Align != null)
                 {

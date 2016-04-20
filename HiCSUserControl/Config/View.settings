@@ -40,7 +40,7 @@
                   "ColumnID":"Name",
                   "ColumnText":"名称",
                   "ColumnName":"Name",
-                  "WidthPercent":30,
+                  "WidthPercent":40,
                   "Align":"left",
                   "IsShow":1
                   },
@@ -56,8 +56,8 @@
                   "ColumnID":"Count",
                   "ColumnText":"数量",
                   "ColumnName":"Count",
-                  "WidthPercent":10,
-                  "Align":"left",
+                  "Width":40,
+                  "Align":"center",
                   "IsShow":1
                   },
                   {

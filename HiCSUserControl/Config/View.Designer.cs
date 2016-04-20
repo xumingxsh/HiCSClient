@@ -84,29 +84,28 @@ namespace HiCSUserControl.Config {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("\r\n                  [\r\n                  {\r\n                  \"ColumnID\":\"Name\",\r" +
             "\n                  \"ColumnText\":\"名称\",\r\n                  \"ColumnName\":\"Name\",\r\n " +
-            "                 \"WidthPercent\":30,\r\n                  \"Align\":\"left\",\r\n        " +
+            "                 \"WidthPercent\":40,\r\n                  \"Align\":\"left\",\r\n        " +
             "          \"IsShow\":1\r\n                  },\r\n                  {\r\n               " +
             "   \"ColumnID\":\"Model\",\r\n                  \"ColumnText\":\"型号\",\r\n                  " +
             "\"ColumnName\":\"Model\",\r\n                  \"WidthPercent\":30,\r\n                  \"" +
             "Align\":\"left\",\r\n                  \"IsShow\":1\r\n                  },\r\n            " +
             "      {\r\n                  \"ColumnID\":\"Count\",\r\n                  \"ColumnText\":\"" +
-            "数量\",\r\n                  \"ColumnName\":\"Count\",\r\n                  \"WidthPercent\":" +
-            "10,\r\n                  \"Align\":\"left\",\r\n                  \"IsShow\":1\r\n          " +
-            "        },\r\n                  {\r\n                  \"ColumnID\":\"Other\",\r\n        " +
-            "          \"ColumnText\":\"操作\",\r\n                  \"ColumnName\":\"\",\r\n              " +
-            "    \"WidthPercent\":30,\r\n                  \"Align\":\"left\",\r\n                  \"Is" +
-            "Show\":1\r\n                  },\r\n                  {\r\n                  \"ColumnID\"" +
-            ":\"ProductID\",\r\n                  \"ColumnText\":\"\",\r\n                  \"ColumnName" +
-            "\":\"ProductID\",\r\n                  \"WidthPercent\":0,\r\n                  \"Align\":\"" +
-            "center\",\r\n                  \"IsShow\":0\r\n                  },\r\n                  " +
-            "{\r\n                  \"ColumnID\":\"ProcessId\",\r\n                  \"ColumnText\":\"\"," +
-            "\r\n                  \"ColumnName\":\"ProcessId\",\r\n                  \"WidthPercent\":" +
-            "0,\r\n                  \"Align\":\"center\",\r\n                  \"IsShow\":0\r\n         " +
-            "         },\r\n                  {\r\n                  \"ColumnID\":\"MaterialID\",\r\n  " +
-            "                \"ColumnText\":\"\",\r\n                  \"ColumnName\":\"MaterialID\",\r\n" +
-            "                  \"WidthPercent\":0,\r\n                  \"Align\":\"center\",\r\n      " +
-            "            \"IsShow\":0\r\n                  }\r\n                  ]\r\n              " +
-            "  ")]
+            "数量\",\r\n                  \"ColumnName\":\"Count\",\r\n                  \"Width\":40,\r\n  " +
+            "                \"Align\":\"center\",\r\n                  \"IsShow\":1\r\n               " +
+            "   },\r\n                  {\r\n                  \"ColumnID\":\"Other\",\r\n             " +
+            "     \"ColumnText\":\"操作\",\r\n                  \"ColumnName\":\"\",\r\n                  \"" +
+            "WidthPercent\":30,\r\n                  \"Align\":\"left\",\r\n                  \"IsShow\"" +
+            ":1\r\n                  },\r\n                  {\r\n                  \"ColumnID\":\"Pro" +
+            "ductID\",\r\n                  \"ColumnText\":\"\",\r\n                  \"ColumnName\":\"Pr" +
+            "oductID\",\r\n                  \"WidthPercent\":0,\r\n                  \"Align\":\"cente" +
+            "r\",\r\n                  \"IsShow\":0\r\n                  },\r\n                  {\r\n  " +
+            "                \"ColumnID\":\"ProcessId\",\r\n                  \"ColumnText\":\"\",\r\n   " +
+            "               \"ColumnName\":\"ProcessId\",\r\n                  \"WidthPercent\":0,\r\n " +
+            "                 \"Align\":\"center\",\r\n                  \"IsShow\":0\r\n              " +
+            "    },\r\n                  {\r\n                  \"ColumnID\":\"MaterialID\",\r\n       " +
+            "           \"ColumnText\":\"\",\r\n                  \"ColumnName\":\"MaterialID\",\r\n     " +
+            "             \"WidthPercent\":0,\r\n                  \"Align\":\"center\",\r\n           " +
+            "       \"IsShow\":0\r\n                  }\r\n                  ]\r\n                ")]
         public string ProcessMaterial_DGV {
             get {
                 return ((string)(this["ProcessMaterial_DGV"]));
