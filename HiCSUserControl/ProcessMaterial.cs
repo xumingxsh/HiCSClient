@@ -132,10 +132,5 @@ namespace HiCSUserControl
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvMaterial.RowHeadersDefaultCellStyle.Font,
                 rectangle, dgvMaterial.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
         }
-
-        private void dgvMaterial_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            DGViewHelper.CheckCellClick(sender, e);
-        }
     }
 }

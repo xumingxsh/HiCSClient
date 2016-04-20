@@ -53,7 +53,6 @@ namespace HiCSUserControl.Common
 
     /// <summary>
     /// 使用配置文件设置列名，显示标题，列宽度（支持绝对宽度和百分比）
-    /// 数据源只支持DataTable
     /// XuminRong 2016.04.03
     /// </summary>
     public sealed class DGViewHelper
@@ -77,8 +76,7 @@ namespace HiCSUserControl.Common
         }
         private Dictionary<string, DGVColumnInfoEx> columns = new Dictionary<string,DGVColumnInfoEx>();
         private List<DGVColumnInfoEx> clsList = new List<DGVColumnInfoEx>();
-        DataGridView myDGV;
-
+        private DataGridView myDGV;
 
         private bool isUsingNo = false;
         private bool isUsingCheck = false;
@@ -94,7 +92,15 @@ namespace HiCSUserControl.Common
         /// <returns></returns>
         public bool Init(ContainerControl form, DataGridView dgv, string json, bool usingCheck = false, bool usingNo = false)
         {
-            List<DGVColumnInfo> lst = HiCSUtil.Json.Json2Obj<List<DGVColumnInfo>>(json);
+            List<DGVColumnInfo> lst = null;
+            if (!string.IsNullOrWhiteSpace(json))
+            {
+                lst = HiCSUtil.Json.Json2Obj<List<DGVColumnInfo>>(json);
+            }
+            else
+            {
+                lst = new List<DGVColumnInfo>();
+            }
             isUsingCheck = usingCheck;
             bool result = Init(form, dgv, lst);
 
@@ -240,7 +246,7 @@ namespace HiCSUserControl.Common
             DatagridViewCheckBoxHeaderCell cell = new DatagridViewCheckBoxHeaderCell();
             cell.OnCheckBoxClicked  += OnCheckBoxClicked;
             checkColumn.HeaderCell = cell;
-            
+            checkColumn.Resizable = DataGridViewTriState.False;            
         }
 
         /// <summary>
@@ -293,7 +299,7 @@ namespace HiCSUserControl.Common
         }
 
         /// <summary>
-        /// 更新控件大小
+        /// 更新控件大小,主要用于界面大小变化时的响应事件
         /// </summary>
         public void OnResize()
         {
@@ -305,7 +311,7 @@ namespace HiCSUserControl.Common
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        public static void CheckCellClick(object sender, DataGridViewCellEventArgs e)
+        private static void CheckCellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dgv = sender as DataGridView;
             if (dgv == null)
