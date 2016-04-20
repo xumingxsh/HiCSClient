@@ -40,7 +40,7 @@
                   "ColumnID":"Name",
                   "ColumnText":"名称",
                   "ColumnName":"Name",
-                  "WidthPercent":40,
+                  "WidthPercent":30,
                   "Align":"left",
                   "IsShow":1
                   },
@@ -48,7 +48,7 @@
                   "ColumnID":"Model",
                   "ColumnText":"型号",
                   "ColumnName":"Model",
-                  "WidthPercent":40,
+                  "WidthPercent":30,
                   "Align":"left",
                   "IsShow":1
                   },
@@ -56,7 +56,15 @@
                   "ColumnID":"Count",
                   "ColumnText":"数量",
                   "ColumnName":"Count",
-                  "WidthPercent":20,
+                  "WidthPercent":10,
+                  "Align":"left",
+                  "IsShow":1
+                  },
+                  {
+                  "ColumnID":"Other",
+                  "ColumnText":"操作",
+                  "ColumnName":"",
+                  "WidthPercent":30,
                   "Align":"left",
                   "IsShow":1
                   },

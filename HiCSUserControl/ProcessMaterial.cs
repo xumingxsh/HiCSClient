@@ -94,7 +94,7 @@ namespace HiCSUserControl
 
         private void ProcessMaterial_Load(object sender, EventArgs e)
         {
-            dgvHelper.Init(this, dgvMaterial, ViewConfig.ViewDefault.ProcessMaterial_DGV);
+            dgvHelper.Init(this, dgvMaterial, ViewConfig.ViewDefault.ProcessMaterial_DGV, true, true);
         }
         private void dgvMaterial_SizeChanged(object sender, EventArgs e)
         {
@@ -110,10 +110,9 @@ namespace HiCSUserControl
             int index = e.RowIndex;
 
             Material material = new Material();
-            HiCSUtil.CBO.FillObject<Material>(material, (ref object objValue, string name) =>
+            HiCSUtil.CBO.FillObject<Material>(material, ( string name) =>
                 {
-                    objValue = dgvHelper.GetCellValue(index, name);
-                    return true;
+                    return dgvHelper.GetCellValue(index, name); 
                 });
 
             dbHandler(material);
@@ -123,5 +122,20 @@ namespace HiCSUserControl
         string processID;
 
         DGViewHelper dgvHelper = new DGViewHelper();
+
+        private void dgvMaterial_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X,
+                    e.RowBounds.Location.Y,
+                    dgvMaterial.RowHeadersWidth - 4,
+                    e.RowBounds.Height);
+            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvMaterial.RowHeadersDefaultCellStyle.Font,
+                rectangle, dgvMaterial.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+        }
+
+        private void dgvMaterial_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            DGViewHelper.CheckCellClick(sender, e);
+        }
     }
 }
