@@ -328,7 +328,16 @@ namespace HiCSUserControl.Common
             {
                 return;
             }
-            DataGridViewCheckBoxCell box = dgv.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewCheckBoxCell;
+            DataGridViewCheckBoxCell box = null;
+            if (dgv.SelectionMode == DataGridViewSelectionMode.CellSelect)
+            {
+                box = GetCellSelect(dgv, e);
+            }
+            if (dgv.SelectionMode == DataGridViewSelectionMode.FullRowSelect)
+            {
+                box = GetRowSelect(dgv, e);
+            }
+
             if (box == null)
             {
                 return;
@@ -339,7 +348,27 @@ namespace HiCSUserControl.Common
             {
                 flag = (bool)val;
             }
-            dgv.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = !flag;
+            box.Value = !flag;
+        }
+
+        private static DataGridViewCheckBoxCell GetCellSelect(DataGridView dgv, DataGridViewCellEventArgs e)
+        {
+            return dgv.Rows[e.RowIndex].Cells[e.ColumnIndex] as DataGridViewCheckBoxCell;
+        }
+
+        private static DataGridViewCheckBoxCell GetRowSelect(DataGridView dgv, DataGridViewCellEventArgs e)
+        {
+            DataGridViewCheckBoxCell box = null;
+            foreach (DataGridViewColumn it in dgv.Columns)
+            {
+                box = dgv.Rows[e.RowIndex].Cells[it.Index] as DataGridViewCheckBoxCell;
+                if (box != null)
+                {
+                    break;
+                }
+            }
+
+            return box;
         }
 
         private static void RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
