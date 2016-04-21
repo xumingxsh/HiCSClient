@@ -18,5 +18,7 @@ namespace HiCSUserControl
         {
             HiCSControl.UserConfig.Init(dbType, conn, xmlFolder);
         }
+
+        public static string ViewXmlFolder { set; get; }
     }
 }

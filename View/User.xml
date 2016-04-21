@@ -1,18 +1,13 @@
-﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="HiCSUserControl.Config" GeneratedClassName="View">
-  <Profiles />
-  <Settings>
-    <Setting Name="Setting" Type="System.String" Scope="User">
-      <Value Profile="(Default)">121</Value>
-    </Setting>
-    <Setting Name="UserLoginModule_DGV" Type="System.String" Scope="User">
-      <Value Profile="(Default)">
+<?xml version="1.0"?>
+<Root>
+    <MODULE id="User" script="用户相关模块显示信息">
+        <Text id="User.DGV_LoginUsers">		
               [
               {
               "ColumnID":"UserName",
               "ColumnText":"UserName",
               "ColumnName":"UserName",
-              "WidthPercent":100,
+              "WidthPercent":50,
               "Align":"center",
               "IsShow":1
               },
@@ -20,21 +15,20 @@
               "ColumnID":"UserID",
               "ColumnText":"",
               "ColumnName":"UserID",
-              "WidthPercent":0,
+              "WidthPercent":50,
               "Align":"center",
               "IsShow":0
               }
               ]
-            </Value>
-    </Setting>
-    <Setting Name="UserLogin_ControlInfo" Type="System.String" Scope="User">
-      <Value Profile="(Default)">
+        </Text>
+        <Text id="User.UserLogin_ControlInfo">		
               [{"ID":"Name","CanNull":"false","Reg":"","Err":"名称不允许为空，请填写"},
               {"ID":"PWD","CanNull":"false","Reg":"","Err":"密码不允许为空，请填写"}]
-            </Value>
-    </Setting>
-    <Setting Name="ProcessMaterial_DGV" Type="System.String" Scope="User">
-      <Value Profile="(Default)">
+		</Text>
+    </MODULE>
+	
+    <MODULE script="用户相关模块显示信息">
+        <Text id="Production.DGV_Materials">
                   [
                   {
                   "ColumnID":"Name",
@@ -93,7 +87,6 @@
                   "IsShow":0
                   }
                   ]
-                </Value>
-    </Setting>
-  </Settings>
-</SettingsFile>
+        </Text>
+    </MODULE>
+</Root>

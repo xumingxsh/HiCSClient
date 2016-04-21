@@ -25,6 +25,7 @@ data source=" + path + "/edqdb.xls";
 
 
             HiCSUserControl.UserConfig.Init(2, conn, path + "/xmls");
+            HiCSUserControl.UserConfig.ViewXmlFolder = topDir.FullName + "/View";
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

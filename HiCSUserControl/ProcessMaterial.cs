@@ -94,7 +94,7 @@ namespace HiCSUserControl
 
         private void ProcessMaterial_Load(object sender, EventArgs e)
         {
-            dgvHelper.Init(this, dgvMaterial, ViewConfig.ViewDefault.ProcessMaterial_DGV, true, true);
+            dgvHelper.Init(this, dgvMaterial, ViewConfig.GetView("Production.DGV_Materials"), true, true);
         }
         private void dgvMaterial_SizeChanged(object sender, EventArgs e)
         {

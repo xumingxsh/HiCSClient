@@ -34,7 +34,7 @@ namespace HiCSUserControl
         private void UserLogin_Load(object sender, EventArgs e)
         {
             IsOK = false;
-            wrap.InitControlsInfo(this, ViewConfig.ViewDefault.UserLogin_ControlInfo);
+            wrap.InitControlsInfo(this, ViewConfig.GetView("User.UserLogin_ControlInfo"));
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

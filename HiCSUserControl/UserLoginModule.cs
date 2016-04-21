@@ -54,7 +54,7 @@ namespace HiCSUserControl
 
         private void UserLoginModule_Load(object sender, EventArgs e)
         {
-            dgvHelper.Init(this, dgvLoginUser, ViewConfig.ViewDefault.UserLoginModule_DGV);
+            dgvHelper.Init(this, dgvLoginUser, ViewConfig.GetView("User.DGV_LoginUsers"));
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

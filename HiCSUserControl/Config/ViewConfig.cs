@@ -1,8 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml;
+
+using HiCSSQL;
 
 namespace HiCSUserControl
 {
@@ -13,14 +12,48 @@ namespace HiCSUserControl
     {
         /// <summary>
         /// 获得基本展示配置对象
-        /// XuminRong 2016.04.15
+        /// XuminRong 2016.04.21
         /// </summary>
-        public  static HiCSUserControl.Config.View ViewDefault
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public static string GetView(string id)
+        {
+            TextInfo info =  ChchText.GetValue(id);
+            if (info == null)
+            {
+                System.Diagnostics.Debug.Assert(false, string.Format("the key({0}) for view xml config not exist", id));
+            }
+            return info.Text;
+        }
+
+        private static CachProxy<TextInfo> ChchText
         {
             get
             {
-                return HiCSUserControl.Config.View.Default;
+                if (chchText == null)
+                {
+                    chchText = new CachProxy<TextInfo>();
+                    chchText.LoadXMLs(UserConfig.ViewXmlFolder);
+                }
+                return chchText;
             }
+        }
+
+        static CachProxy<TextInfo> chchText = null;
+
+        class TextInfo : ICachItem
+        {
+            public bool Parse(XmlNode node)
+            {
+                if (string.IsNullOrWhiteSpace(node.InnerText))
+                {
+                    return false;
+                }
+
+                Text = node.InnerText;
+                return true;
+            }
+            public string Text { set; get; }
         }
     }
 }

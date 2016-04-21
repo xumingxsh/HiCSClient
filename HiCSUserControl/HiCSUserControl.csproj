@@ -36,7 +36,7 @@
     </Reference>
     <Reference Include="HiCSSQL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\lib\HiCSSQL.dll</HintPath>
+      <HintPath>..\lib\HiCSSQL.dll</HintPath>
     </Reference>
     <Reference Include="HiCSUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -56,11 +56,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config\View.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTimeSharedInput>True</DesignTimeSharedInput>
-      <DependentUpon>View.settings</DependentUpon>
-    </Compile>
     <Compile Include="Config\ViewConfig.cs" />
     <Compile Include="ProcessMaterial.cs">
       <SubType>UserControl</SubType>
@@ -112,13 +107,6 @@
       <Project>{ba91ee53-3d9e-4672-8f91-6336fa25e858}</Project>
       <Name>HiCSModel</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="app.config" />
-    <None Include="Config\View.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>View.Designer.cs</LastGenOutput>
-    </None>
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
