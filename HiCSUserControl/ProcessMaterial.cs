@@ -94,7 +94,13 @@ namespace HiCSUserControl
 
         private void ProcessMaterial_Load(object sender, EventArgs e)
         {
+            System.Drawing.Font font = new System.Drawing.Font("宋体", 20);
+            dgvMaterial.DefaultCellStyle.Font = font;
+            dgvMaterial.RowHeadersDefaultCellStyle.Font = font;
             dgvHelper.Init(this, dgvMaterial, ViewConfig.GetView("Production.DGV_Materials"), true, true);
+
+
+            this.dgvMaterial.RowPostPaint += dgvMaterial_RowPostPaint;
         }
         private void dgvMaterial_SizeChanged(object sender, EventArgs e)
         {
@@ -123,14 +129,26 @@ namespace HiCSUserControl
 
         DGViewHelper dgvHelper = new DGViewHelper();
 
+        System.Drawing.Font selFont = new System.Drawing.Font("宋体", 9);
         private void dgvMaterial_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
+            /*
             System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X,
                     e.RowBounds.Location.Y,
                     dgvMaterial.RowHeadersWidth - 4,
                     e.RowBounds.Height);
             TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvMaterial.RowHeadersDefaultCellStyle.Font,
-                rectangle, dgvMaterial.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);
+                rectangle, dgvMaterial.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);*/
+
+            if (dgvHelper.IsRowSelected(e.RowIndex))
+            {
+                dgvMaterial.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.Green;
+                //dgvMaterial.Rows[e.RowIndex].DefaultCellStyle.Font = selFont;
+            }
+            else
+            {
+                dgvMaterial.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
+            }
         }
     }
 }

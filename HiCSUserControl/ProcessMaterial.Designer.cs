@@ -41,6 +41,7 @@
             this.dgvMaterial.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvMaterial.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvMaterial.Location = new System.Drawing.Point(0, 0);
+            this.dgvMaterial.MultiSelect = false;
             this.dgvMaterial.Name = "dgvMaterial";
             this.dgvMaterial.ReadOnly = true;
             this.dgvMaterial.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
@@ -50,7 +51,7 @@
             this.dgvMaterial.Size = new System.Drawing.Size(352, 323);
             this.dgvMaterial.TabIndex = 0;
             this.dgvMaterial.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMaterial_CellDoubleClick);
-            this.dgvMaterial.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvMaterial_RowPostPaint);
+            //this.dgvMaterial.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvMaterial_RowPostPaint);
             this.dgvMaterial.SizeChanged += new System.EventHandler(this.dgvMaterial_SizeChanged);
             // 
             // ProcessMaterial

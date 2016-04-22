@@ -44,7 +44,7 @@ namespace HiCSUserControl
                 DataGridViewColumn cl = it as DataGridViewCheckBoxColumn;
                 if (cl != null)
                 {
-                    checkBoxIndex = cl.DisplayIndex;
+                    checkBoxIndex = cl.Index;
                     break;
                 }
             }

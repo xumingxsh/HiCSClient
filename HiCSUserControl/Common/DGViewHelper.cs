@@ -11,7 +11,47 @@ namespace HiCSUserControl.Common
     public sealed class DGViewHelper
     {
         const int CheckColumnWidth = 20;/// 复选列宽度
-        const int RowHeaderWidth = 20;// 编号列宽度
+        private int RowHeaderWidth// 编号列宽度
+        {
+            get
+            {
+                return (int)myDGV.RowHeadersDefaultCellStyle.Font.Size * 2 + 8; 
+            }
+        }
+
+        /// <summary>
+        /// 设置行号
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="width"></param>
+        public static void SetRowNo(DataGridView dgv, int width = 0)
+        {
+            if (width == 0)
+            {
+                width = (int)dgv.RowHeadersDefaultCellStyle.Font.Size * 2 + 8; 
+            }
+            DataGridViewEvent.SetRowNo(dgv, width);
+        }
+
+        private int CheckBoxIndex = -1;
+        public static DataGridViewCheckBoxColumn CreateCheckBoxColumn(int width = 20)
+        {
+            if (width < 1)
+            {
+                width = 20;
+            }
+            DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn();
+            checkColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+            checkColumn.Width = CheckColumnWidth;
+            checkColumn.DisplayIndex = 0;
+            checkColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
+
+            DatagridViewCheckBoxHeaderCell cell = new DatagridViewCheckBoxHeaderCell();
+            cell.OnCheckBoxClicked += DataGridViewEvent.SetCheckHeadEvent;
+            checkColumn.HeaderCell = cell;
+            checkColumn.Resizable = DataGridViewTriState.False;
+            return checkColumn;
+        }
 
         /// <summary>
         /// 初始化控件
@@ -43,7 +83,7 @@ namespace HiCSUserControl.Common
             isUsingNo = usingNo;
             if (isUsingNo)
             {
-                DataGridViewEvent.SetRowNo(dgv, RowHeaderWidth);
+                SetRowNo(dgv);
             }
             return true;
         }
@@ -65,6 +105,7 @@ namespace HiCSUserControl.Common
             myDGV = dgv;
             dgv.AutoGenerateColumns = false;
             dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
+            dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             columns.Clear();
             clsList.Clear();
             int index = 0;
@@ -116,12 +157,13 @@ namespace HiCSUserControl.Common
                 if (it is DataGridViewCheckBoxColumn)
                 {
                     hasCheck = true;
+                    CheckBoxIndex = it.Index;
                 }
             }
 
             if (!hasCheck && isUsingCheck)
             {
-                CreateCheckColumn();
+                checkColumn = CreateCheckBoxColumn(CheckColumnWidth);
             }
         }
         
@@ -145,6 +187,7 @@ namespace HiCSUserControl.Common
                 }
                 ex.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
                 it.Control = ex;
+                dgv.Columns.Add(ex);
             }
 
             foreach (var it in columns.Values)
@@ -155,21 +198,18 @@ namespace HiCSUserControl.Common
             }
         }
 
-        private void CreateCheckColumn()
+        public bool IsRowSelected(int rowIndex)
         {
-            checkColumn = new DataGridViewCheckBoxColumn();
-            checkColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            checkColumn.Name = "clChkColumn";
-            checkColumn.HeaderText = "";
-            checkColumn.Width = CheckColumnWidth;
-            checkColumn.DisplayIndex = 0;
-
-            DatagridViewCheckBoxHeaderCell cell = new DatagridViewCheckBoxHeaderCell();
-            cell.OnCheckBoxClicked += DataGridViewEvent.SetCheckHeadEvent;
-            checkColumn.HeaderCell = cell;
-            checkColumn.Resizable = DataGridViewTriState.False;            
+            if (CheckBoxIndex < 0)
+            {
+                return false;
+            }
+            if (rowIndex >= myDGV.Rows.Count)
+            {
+                return false;
+            }
+            return Convert.ToBoolean(myDGV.Rows[rowIndex].Cells[CheckBoxIndex].Value);
         }
-
         /// <summary>
         /// 取得视图某行某列的值
         /// </summary>
@@ -233,17 +273,18 @@ namespace HiCSUserControl.Common
             {
                 width -= myDGV.RowHeadersWidth;
             }
-            if (isUsingNo)
-            {
-                width -= RowHeaderWidth;
-            }
-            myDGV.Columns.Clear();
+
             int startIndex = 0;
             if (checkColumn != null)
             {
                 width -= checkColumn.Width;
                 startIndex++;
                 myDGV.Columns.Add(checkColumn);
+
+                if (CheckBoxIndex < 0)
+                {
+                    CheckBoxIndex = checkColumn.Index;
+                }
             }
 
             int pinWidth = 0;
@@ -293,9 +334,9 @@ namespace HiCSUserControl.Common
                         it.Control.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
                     }
                 }
-                myDGV.Columns.Add(it.Control);
             }
         }
+
         private Dictionary<string, DGVColumnInfoEx> columns = new Dictionary<string, DGVColumnInfoEx>();
         private List<DGVColumnInfoEx> clsList = new List<DGVColumnInfoEx>(); // 存储的列扩展信息
         private DataGridView myDGV;
