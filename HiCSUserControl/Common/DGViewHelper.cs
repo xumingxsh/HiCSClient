@@ -30,10 +30,16 @@ namespace HiCSUserControl.Common
             {
                 width = (int)dgv.RowHeadersDefaultCellStyle.Font.Size * 2 + 8; 
             }
-            DataGridViewEvent.SetRowNo(dgv, width);
+            DGViewEvent.SetRowNo(dgv, width);
         }
 
         private int CheckBoxIndex = -1;
+
+        /// <summary>
+        /// 创建多选框
+        /// </summary>
+        /// <param name="width"></param>
+        /// <returns></returns>
         public static DataGridViewCheckBoxColumn CreateCheckBoxColumn(int width = 20)
         {
             if (width < 1)
@@ -47,7 +53,7 @@ namespace HiCSUserControl.Common
             checkColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
 
             DatagridViewCheckBoxHeaderCell cell = new DatagridViewCheckBoxHeaderCell();
-            cell.OnCheckBoxClicked += DataGridViewEvent.SetCheckHeadEvent;
+            cell.OnCheckBoxClicked += DGViewEvent.SetCheckHeadEvent;
             checkColumn.HeaderCell = cell;
             checkColumn.Resizable = DataGridViewTriState.False;
             return checkColumn;
@@ -78,7 +84,7 @@ namespace HiCSUserControl.Common
 
             if (usingCheck)
             {
-                DataGridViewEvent.SetCheckColumns(dgv);
+                DGViewEvent.SetCheckColumns(dgv);
             }
             isUsingNo = usingNo;
             if (isUsingNo)
@@ -118,7 +124,13 @@ namespace HiCSUserControl.Common
                 clsList.Add(ex);
             }
 
-            InitExistColumns8TagAndCreateCheckBox(dgv); // 对已存在的列进行处理,并创建多选列
+            InitExistColumns8Tag(dgv); // 对已存在的列进行处理
+
+            if (CheckBoxIndex < 0)  // 并创建多选列
+            {
+                checkColumn = CreateCheckBoxColumn(CheckColumnWidth);
+            }
+
             CreateColumnsAndInit(dgv);// 创建不存在的列并设置相关信息
             OnResize();     // 设置列宽
             return true;
@@ -127,9 +139,8 @@ namespace HiCSUserControl.Common
         /// <summary>
         /// 对已存在的列进行处理,并创建多选列
         /// </summary>
-        private void InitExistColumns8TagAndCreateCheckBox(DataGridView dgv)
+        private void InitExistColumns8Tag(DataGridView dgv)
         {
-            bool hasCheck = false;
             foreach (DataGridViewColumn it in dgv.Columns)
             {
                 string key = Convert.ToString(it.Tag);
@@ -156,14 +167,8 @@ namespace HiCSUserControl.Common
 
                 if (it is DataGridViewCheckBoxColumn)
                 {
-                    hasCheck = true;
                     CheckBoxIndex = it.Index;
                 }
-            }
-
-            if (!hasCheck && isUsingCheck)
-            {
-                checkColumn = CreateCheckBoxColumn(CheckColumnWidth);
             }
         }
         

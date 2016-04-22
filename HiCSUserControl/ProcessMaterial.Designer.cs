@@ -51,7 +51,7 @@
             this.dgvMaterial.Size = new System.Drawing.Size(352, 323);
             this.dgvMaterial.TabIndex = 0;
             this.dgvMaterial.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMaterial_CellDoubleClick);
-            //this.dgvMaterial.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvMaterial_RowPostPaint);
+            this.dgvMaterial.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvMaterial_RowPostPaint);
             this.dgvMaterial.SizeChanged += new System.EventHandler(this.dgvMaterial_SizeChanged);
             // 
             // ProcessMaterial

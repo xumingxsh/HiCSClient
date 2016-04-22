@@ -132,18 +132,9 @@ namespace HiCSUserControl
         System.Drawing.Font selFont = new System.Drawing.Font("宋体", 9);
         private void dgvMaterial_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
         {
-            /*
-            System.Drawing.Rectangle rectangle = new System.Drawing.Rectangle(e.RowBounds.Location.X,
-                    e.RowBounds.Location.Y,
-                    dgvMaterial.RowHeadersWidth - 4,
-                    e.RowBounds.Height);
-            TextRenderer.DrawText(e.Graphics, (e.RowIndex + 1).ToString(), dgvMaterial.RowHeadersDefaultCellStyle.Font,
-                rectangle, dgvMaterial.RowHeadersDefaultCellStyle.ForeColor, TextFormatFlags.VerticalCenter | TextFormatFlags.Right);*/
-
             if (dgvHelper.IsRowSelected(e.RowIndex))
             {
                 dgvMaterial.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.Green;
-                //dgvMaterial.Rows[e.RowIndex].DefaultCellStyle.Font = selFont;
             }
             else
             {

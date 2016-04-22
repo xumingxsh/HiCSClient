@@ -7,7 +7,7 @@ namespace HiCSUserControl
     /// <summary>
     /// DataGridView事件实现
     /// </summary>
-    static class DataGridViewEvent
+    static class DGViewEvent
     {
         /// <summary>
         /// 设置行编号及相关事件
@@ -127,6 +127,12 @@ namespace HiCSUserControl
             box.Value = !flag;
         }
 
+        /// <summary>
+        /// 取得备选列
+        /// </summary>
+        /// <param name="dgv"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         private static DataGridViewCheckBoxCell GetRowSelect(DataGridView dgv, DataGridViewCellEventArgs e)
         {
             DataGridViewCheckBoxCell box = null;
