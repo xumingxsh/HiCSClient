@@ -80,10 +80,9 @@ namespace HiCSUserControl
         /// <param name="type"></param>
         public void SetProcess(string prsID, ProvidEnum.MaterialType type = ProvidEnum.MaterialType.Main)
         {
-            SetProcess(productID, prsID, type);
+            SetProcess(productID, prsID, type);  
         }
-
-        /// <summary>
+         /// <summary>
         /// 设置工序
         /// </summary>
         /// <param name="type"></param>
@@ -94,7 +93,7 @@ namespace HiCSUserControl
 
         private void ProcessMaterial_Load(object sender, EventArgs e)
         {
-            System.Drawing.Font font = new System.Drawing.Font("宋体", 20);
+            System.Drawing.Font font = new System.Drawing.Font("宋体", 10);
             dgvMaterial.DefaultCellStyle.Font = font;
             dgvMaterial.RowHeadersDefaultCellStyle.Font = font;
             dgvHelper.Init(this, dgvMaterial, ViewConfig.GetView("Production.DGV_Materials"), true, true);
@@ -103,6 +102,7 @@ namespace HiCSUserControl
                 System.Drawing.Color.FromArgb(219, 229, 241),
                 System.Drawing.Color.FromArgb(215, 228, 188));
         }
+
         private void dgvMaterial_SizeChanged(object sender, EventArgs e)
         {
             dgvHelper.OnResize();

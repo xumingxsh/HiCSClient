@@ -48,7 +48,15 @@ namespace HiCSUserControl.Common
         System.Drawing.Color defColor;
         System.Drawing.Color altColor;
         System.Drawing.Color selColor;
-        public void SetRowColor(System.Drawing.Color def, System.Drawing.Color alter, System.Drawing.Color current, System.Drawing.Color select)
+
+        /// <summary>
+        /// 设置行颜色
+        /// </summary>
+        /// <param name="def"></param>
+        /// <param name="alter"></param>
+        /// <param name="select"></param>
+        /// <param name="current"></param>
+        public void SetRowColor(System.Drawing.Color def, System.Drawing.Color alter, System.Drawing.Color select, System.Drawing.Color current)
         {
             if (myDGV == null)
             {
@@ -58,11 +66,39 @@ namespace HiCSUserControl.Common
             defColor = def;
             altColor = alter;
             selColor = select;
-            myDGV.DefaultCellStyle.SelectionBackColor = current;
-            myDGV.AlternatingRowsDefaultCellStyle.SelectionBackColor = current;
-            myDGV.RowPostPaint += SetRowColor_Evt;
+
+            if (CheckBoxIndex < 0)
+            {
+                SetRowColor(defColor, altColor, selColor);
+            }
+            else
+            {
+                myDGV.DefaultCellStyle.SelectionBackColor = current;
+                myDGV.AlternatingRowsDefaultCellStyle.SelectionBackColor = current;
+                myDGV.RowPostPaint += SetRowColor_Evt;
+            }
         }
 
+        /// <summary>
+        /// 设置行颜色
+        /// </summary>
+        /// <param name="def"></param>
+        /// <param name="alter"></param>
+        /// <param name="select"></param>
+        public void SetRowColor(System.Drawing.Color def, System.Drawing.Color alter, System.Drawing.Color select)
+        {
+            if (myDGV == null)
+            {
+                return;
+            }
+            defColor = def;
+            altColor = alter;
+            selColor = select;
+            myDGV.DefaultCellStyle.BackColor = def;
+            myDGV.AlternatingRowsDefaultCellStyle.BackColor = alter;
+            myDGV.DefaultCellStyle.SelectionBackColor = select;
+            myDGV.AlternatingRowsDefaultCellStyle.SelectionBackColor = select;
+        }
         private void SetRowColor_Evt(object sender, DataGridViewRowPostPaintEventArgs e)
         {
             DataGridView dgv = sender as DataGridView;
@@ -137,6 +173,8 @@ namespace HiCSUserControl.Common
             {
                 return;
             }
+
+
             int width = myDGV.Size.Width - 5;
             if (myDGV.RowHeadersVisible)
             {
@@ -148,7 +186,6 @@ namespace HiCSUserControl.Common
             {
                 width -= checkColumn.Width;
                 startIndex++;
-                myDGV.Columns.Add(checkColumn);
 
                 if (CheckBoxIndex < 0)
                 {
@@ -238,9 +275,10 @@ namespace HiCSUserControl.Common
 
             InitExistColumns8Tag(dgv); // 对已存在的列进行处理
 
-            if (CheckBoxIndex < 0)  // 并创建多选列
+            if (CheckBoxIndex < 0 && isUsingCheck)  // 并创建多选列
             {
                 checkColumn = DGViewUtil.CreateCheckBoxColumn();
+                myDGV.Columns.Add(checkColumn);
             }
 
             CreateColumnsAndInit(dgv);// 创建不存在的列并设置相关信息
