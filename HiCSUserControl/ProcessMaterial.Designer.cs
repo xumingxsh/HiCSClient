@@ -51,7 +51,6 @@
             this.dgvMaterial.Size = new System.Drawing.Size(352, 323);
             this.dgvMaterial.TabIndex = 0;
             this.dgvMaterial.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvMaterial_CellDoubleClick);
-            this.dgvMaterial.RowPostPaint += new System.Windows.Forms.DataGridViewRowPostPaintEventHandler(this.dgvMaterial_RowPostPaint);
             this.dgvMaterial.SizeChanged += new System.EventHandler(this.dgvMaterial_SizeChanged);
             // 
             // ProcessMaterial
@@ -62,6 +61,7 @@
             this.Name = "ProcessMaterial";
             this.Size = new System.Drawing.Size(352, 323);
             this.Load += new System.EventHandler(this.ProcessMaterial_Load);
+           // this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.ProcessMaterial_MouseMove);
             ((System.ComponentModel.ISupportInitialize)(this.dgvMaterial)).EndInit();
             this.ResumeLayout(false);
 

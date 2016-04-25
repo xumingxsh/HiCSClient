@@ -56,9 +56,10 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\DGViewUtil.cs" />
     <Compile Include="Common\Impl\DatagridViewCheckBoxHeaderCell.cs" />
-    <Compile Include="Common\Impl\DataGridViewEvent.cs" />
     <Compile Include="Common\Impl\DGVColumnInfo.cs" />
+    <Compile Include="Common\Impl\DGViewEvent.cs" />
     <Compile Include="Config\ViewConfig.cs" />
     <Compile Include="ProcessMaterial.cs">
       <SubType>UserControl</SubType>

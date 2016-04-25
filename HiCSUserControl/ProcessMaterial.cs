@@ -98,9 +98,10 @@ namespace HiCSUserControl
             dgvMaterial.DefaultCellStyle.Font = font;
             dgvMaterial.RowHeadersDefaultCellStyle.Font = font;
             dgvHelper.Init(this, dgvMaterial, ViewConfig.GetView("Production.DGV_Materials"), true, true);
-
-
-            this.dgvMaterial.RowPostPaint += dgvMaterial_RowPostPaint;
+            dgvHelper.SetRowColor(System.Drawing.Color.White,
+                System.Drawing.Color.FromArgb(192, 192, 192),
+                System.Drawing.Color.FromArgb(219, 229, 241),
+                System.Drawing.Color.FromArgb(215, 228, 188));
         }
         private void dgvMaterial_SizeChanged(object sender, EventArgs e)
         {
@@ -116,9 +117,9 @@ namespace HiCSUserControl
             int index = e.RowIndex;
 
             Material material = new Material();
-            HiCSUtil.CBO.FillObject<Material>(material, ( string name) =>
+            HiCSUtil.CBO.FillObject<Material>(material, (string name) =>
                 {
-                    return dgvHelper.GetCellValue(index, name); 
+                    return dgvHelper.GetCellValue(index, name);
                 });
 
             dbHandler(material);
@@ -128,18 +129,5 @@ namespace HiCSUserControl
         string processID;
 
         DGViewHelper dgvHelper = new DGViewHelper();
-
-        System.Drawing.Font selFont = new System.Drawing.Font("宋体", 9);
-        private void dgvMaterial_RowPostPaint(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            if (dgvHelper.IsRowSelected(e.RowIndex))
-            {
-                dgvMaterial.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.Green;
-            }
-            else
-            {
-                dgvMaterial.Rows[e.RowIndex].DefaultCellStyle.BackColor = System.Drawing.Color.White;
-            }
-        }
     }
 }

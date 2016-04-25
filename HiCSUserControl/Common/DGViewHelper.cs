@@ -10,55 +10,6 @@ namespace HiCSUserControl.Common
     /// </summary>
     public sealed class DGViewHelper
     {
-        const int CheckColumnWidth = 20;/// 复选列宽度
-        private int RowHeaderWidth// 编号列宽度
-        {
-            get
-            {
-                return (int)myDGV.RowHeadersDefaultCellStyle.Font.Size * 2 + 8; 
-            }
-        }
-
-        /// <summary>
-        /// 设置行号
-        /// </summary>
-        /// <param name="dgv"></param>
-        /// <param name="width"></param>
-        public static void SetRowNo(DataGridView dgv, int width = 0)
-        {
-            if (width == 0)
-            {
-                width = (int)dgv.RowHeadersDefaultCellStyle.Font.Size * 2 + 8; 
-            }
-            DGViewEvent.SetRowNo(dgv, width);
-        }
-
-        private int CheckBoxIndex = -1;
-
-        /// <summary>
-        /// 创建多选框
-        /// </summary>
-        /// <param name="width"></param>
-        /// <returns></returns>
-        public static DataGridViewCheckBoxColumn CreateCheckBoxColumn(int width = 20)
-        {
-            if (width < 1)
-            {
-                width = 20;
-            }
-            DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn();
-            checkColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-            checkColumn.Width = CheckColumnWidth;
-            checkColumn.DisplayIndex = 0;
-            checkColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
-
-            DatagridViewCheckBoxHeaderCell cell = new DatagridViewCheckBoxHeaderCell();
-            cell.OnCheckBoxClicked += DGViewEvent.SetCheckHeadEvent;
-            checkColumn.HeaderCell = cell;
-            checkColumn.Resizable = DataGridViewTriState.False;
-            return checkColumn;
-        }
-
         /// <summary>
         /// 初始化控件
         /// </summary>
@@ -89,9 +40,170 @@ namespace HiCSUserControl.Common
             isUsingNo = usingNo;
             if (isUsingNo)
             {
-                SetRowNo(dgv);
+                DGViewUtil.SetRowNo(dgv);
             }
             return true;
+        }
+
+        System.Drawing.Color defColor;
+        System.Drawing.Color altColor;
+        System.Drawing.Color selColor;
+        public void SetRowColor(System.Drawing.Color def, System.Drawing.Color alter, System.Drawing.Color current, System.Drawing.Color select)
+        {
+            if (myDGV == null)
+            {
+                return;
+            }
+
+            defColor = def;
+            altColor = alter;
+            selColor = select;
+            myDGV.DefaultCellStyle.SelectionBackColor = current;
+            myDGV.AlternatingRowsDefaultCellStyle.SelectionBackColor = current;
+            myDGV.RowPostPaint += SetRowColor_Evt;
+        }
+
+        private void SetRowColor_Evt(object sender, DataGridViewRowPostPaintEventArgs e)
+        {
+            DataGridView dgv = sender as DataGridView;
+            if (dgv == null)
+            {
+                return;
+            }
+            DataGridViewRow row = dgv.Rows[e.RowIndex];
+            if (IsRowSelected(e.RowIndex))
+            {
+                SetColor(row.DefaultCellStyle, selColor);
+            }
+            else
+            {
+                if (e.RowIndex % 2 == 0)
+                {
+                    SetColor(row.DefaultCellStyle, defColor);
+                }
+                else
+                {
+                    SetColor(row.DefaultCellStyle, altColor);
+                }
+            }
+        }
+
+        private void SetColor(DataGridViewCellStyle style, System.Drawing.Color color)
+        {
+            if (style.BackColor != color)
+            {
+                style.BackColor = color;
+            }
+        }
+
+        /// <summary>
+        /// 某行是否已选择
+        /// </summary>
+        /// <param name="rowIndex"></param>
+        /// <returns></returns>
+        public bool IsRowSelected(int rowIndex)
+        {
+            return DGViewUtil.IsRowSelected(myDGV, CheckBoxIndex, rowIndex);
+        }
+
+        /// <summary>
+        /// 取得视图某行某列的值
+        /// </summary>
+        /// <param name="rowIndex"></param>
+        /// <param name="cellIndex"></param>
+        /// <returns></returns>
+        public string GetCellValue(int rowIndex, int cellIndex)
+        {
+            return DGViewUtil.GetCellValue(myDGV, rowIndex, cellIndex);
+        }
+
+        /// <summary>
+        /// 取得视图某行某列的值
+        /// </summary>
+        /// <param name="rowIndex"></param>
+        /// <param name="columnName"></param>
+        /// <returns></returns>
+        public string GetCellValue(int rowIndex, string columnName)
+        {
+            return DGViewUtil.GetCellValue(myDGV, rowIndex, columnName);
+        }
+
+        /// <summary>
+        /// 设置列宽
+        /// </summary>
+        public void OnResize()
+        {
+            if (myDGV == null)
+            {
+                return;
+            }
+            int width = myDGV.Size.Width - 5;
+            if (myDGV.RowHeadersVisible)
+            {
+                width -= myDGV.RowHeadersWidth;
+            }
+
+            int startIndex = 0;
+            if (checkColumn != null)
+            {
+                width -= checkColumn.Width;
+                startIndex++;
+                myDGV.Columns.Add(checkColumn);
+
+                if (CheckBoxIndex < 0)
+                {
+                    CheckBoxIndex = checkColumn.Index;
+                }
+            }
+
+            int pinWidth = 0;
+
+            foreach (var it in clsList)
+            {
+                if (it.Column.Width > 0)
+                {
+                    pinWidth += it.Column.Width;
+                }
+            }
+
+            width -= pinWidth;
+
+            if (width < 0)
+            {
+                width = myDGV.Size.Width;
+            }
+
+            foreach (var it in clsList)
+            {
+                if (it.Column.Width > 0)
+                {
+                    it.Control.Width = it.Column.Width;
+                }
+                else
+                {
+                    it.Control.Width = (width * it.Column.WidthPercent) / 100;
+                }
+                it.Control.DisplayIndex = it.DipplayIndex + startIndex;
+                if (it.Column.Align != null)
+                {
+                    string align = it.Column.Align.Trim().ToLower();
+                    if (align.Equals("left"))
+                    {
+                        it.Control.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                        it.Control.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
+                    }
+                    if (align.Equals("right"))
+                    {
+                        it.Control.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+                        it.Control.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
+                    }
+                    if (align.Equals("center"))
+                    {
+                        it.Control.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                        it.Control.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -128,7 +240,7 @@ namespace HiCSUserControl.Common
 
             if (CheckBoxIndex < 0)  // 并创建多选列
             {
-                checkColumn = CreateCheckBoxColumn(CheckColumnWidth);
+                checkColumn = DGViewUtil.CreateCheckBoxColumn();
             }
 
             CreateColumnsAndInit(dgv);// 创建不存在的列并设置相关信息
@@ -203,151 +315,13 @@ namespace HiCSUserControl.Common
             }
         }
 
-        public bool IsRowSelected(int rowIndex)
-        {
-            if (CheckBoxIndex < 0)
-            {
-                return false;
-            }
-            if (rowIndex >= myDGV.Rows.Count)
-            {
-                return false;
-            }
-            return Convert.ToBoolean(myDGV.Rows[rowIndex].Cells[CheckBoxIndex].Value);
-        }
-        /// <summary>
-        /// 取得视图某行某列的值
-        /// </summary>
-        /// <param name="rowIndex"></param>
-        /// <param name="cellIndex"></param>
-        /// <returns></returns>
-        public string GetCellValue(int rowIndex, int cellIndex)
-        {
-            if (myDGV == null)
-            {
-                return null;
-            }
-            if (rowIndex >= myDGV.Rows.Count)
-            {
-                return null;
-            }
-            if (cellIndex >= myDGV.ColumnCount)
-            {
-                return null;
-            }
-            return Convert.ToString(myDGV.Rows[rowIndex].Cells[cellIndex].Value);
-        }
-
-        /// <summary>
-        /// 取得视图某行某列的值
-        /// </summary>
-        /// <param name="rowIndex"></param>
-        /// <param name="columnName"></param>
-        /// <returns></returns>
-        public string GetCellValue(int rowIndex, string columnName)
-        {
-            if (myDGV == null)
-            {
-                return null;
-            }
-            if (rowIndex >= myDGV.Rows.Count)
-            {
-                return null;
-            }
-
-            if (!myDGV.Columns.Contains(columnName))
-            {
-                return null;
-            }
-
-            int cellIndex = myDGV.Columns[columnName].Index;
-            return GetCellValue(rowIndex, cellIndex);
-        }
-
-        /// <summary>
-        /// 设置列宽
-        /// </summary>
-        public void OnResize()
-        {
-            if (myDGV == null)
-            {
-                return;
-            }
-            int width = myDGV.Size.Width - 5;
-            if (myDGV.RowHeadersVisible)
-            {
-                width -= myDGV.RowHeadersWidth;
-            }
-
-            int startIndex = 0;
-            if (checkColumn != null)
-            {
-                width -= checkColumn.Width;
-                startIndex++;
-                myDGV.Columns.Add(checkColumn);
-
-                if (CheckBoxIndex < 0)
-                {
-                    CheckBoxIndex = checkColumn.Index;
-                }
-            }
-
-            int pinWidth = 0;
-
-            foreach (var it in clsList)
-            {
-                if (it.Column.Width > 0)
-                {
-                    pinWidth += it.Column.Width;
-                }
-            }
-
-            width -= pinWidth;
-
-            if (width < 0)
-            {
-                width = myDGV.Size.Width; 
-            }
-
-            foreach (var it in clsList)
-            {
-                if (it.Column.Width > 0)
-                {
-                    it.Control.Width = it.Column.Width;
-                }
-                else
-                {
-                    it.Control.Width = (width * it.Column.WidthPercent) / 100;
-                }
-                it.Control.DisplayIndex = it.DipplayIndex + startIndex;
-                if (it.Column.Align != null)
-                {
-                    string align = it.Column.Align.Trim().ToLower();
-                    if (align.Equals("left"))
-                    {
-                        it.Control.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                        it.Control.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                    }
-                    if (align.Equals("right"))
-                    {
-                        it.Control.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                        it.Control.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    }
-                    if (align.Equals("center"))
-                    {
-                        it.Control.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        it.Control.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    }
-                }
-            }
-        }
-
         private Dictionary<string, DGVColumnInfoEx> columns = new Dictionary<string, DGVColumnInfoEx>();
         private List<DGVColumnInfoEx> clsList = new List<DGVColumnInfoEx>(); // 存储的列扩展信息
         private DataGridView myDGV;
         private bool isUsingNo = false;     // 是否使用行编号
         private bool isUsingCheck = false;  // 是否使用多选列
         private DataGridViewCheckBoxColumn checkColumn = null;  // 多选列
+        private int CheckBoxIndex = -1; // 多选列索引号
 
         /// <summary>
         /// 列信息扩展
