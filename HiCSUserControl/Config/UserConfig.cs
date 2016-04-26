@@ -19,6 +19,11 @@ namespace HiCSUserControl
             HiCSControl.UserConfig.Init(dbType, conn, xmlFolder);
         }
 
+        public static void SetUri(string uri)
+        {
+            HiCSControl.UserConfig.SetUri(uri);
+        }
+
         public static string ViewXmlFolder { set; get; }
     }
 }

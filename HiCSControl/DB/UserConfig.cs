@@ -20,5 +20,10 @@ namespace HiCSControl
             ProvidConfig.XMLFolder = xmlFolder;
             ProvidConfig.DBType = dbType;
         }
+
+        public static void SetUri(string uri)
+        {
+            HiCSControl.DB.Impl.RestHepler.RemoteURI = uri;
+        }
     }
 }

@@ -59,7 +59,7 @@ namespace HiCSControl
         /// <returns></returns>
         public bool Login(string rfid)
         {
-            DataTable dt = DBHelper.ExecuteQuery(rfid);
+            DataTable dt = DBHelper.ExecuteQuery("User.Login_param1", rfid);
             return OnLogin(dt);
         }
 

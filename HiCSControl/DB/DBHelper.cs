@@ -2,8 +2,7 @@
 using System.Data;
 using System.Collections.Generic;
 
-using HiCSSQL;
-using HiCSDB;
+using HiCSControl.DB.Impl;
 
 namespace HiCSControl
 {
@@ -13,18 +12,20 @@ namespace HiCSControl
     /// </summary>
     public class DBHelper
     {
-        static DBOperate db = null;
-
-
-        static DBOperate DB
+        static RestHelperImpl rest = new RestHelperImpl();
+        static DBHelperImpl db = new DBHelperImpl();
+        static IDBHelper dbImpl
         {
             get
             {
-                if (db == null)
+                if (string.IsNullOrWhiteSpace(RestHepler.RemoteURI))
                 {
-                    db = new DBOperate(ProvidConfig.Conn, ProvidConfig.DBType);
+                    return db;
                 }
-                return db;
+                else
+                {
+                    return rest;
+                }
             }
         }
 
@@ -36,13 +37,7 @@ namespace HiCSControl
         /// <returns></returns>
         public static DataTable ExecuteQuery(string id, IDictionary<string, string> mp = null)
         {
-            SqlInfo sql = SQLProxy.GetSqlInfo(id, (string propertyName, ref object objVal) =>
-            {
-                objVal = mp[propertyName];
-                return objVal != null;
-            });
-            DataTable dt = DB.ExecuteDataTable(sql.SQL, sql.Parameters);
-            return ExcelDataTable(dt);
+            return dbImpl.ExecuteQuery(id, mp);
         }
 
         /// <summary>
@@ -53,10 +48,7 @@ namespace HiCSControl
         /// <returns></returns>
         public static DataTable ExecuteQuery(string id, params object[] args)
         {
-            SqlInfo info = SQLProxy.GetSqlInfo(id);
-            string sql = string.Format(info.SQL, args);
-            DataTable dt = DB.ExecuteDataTable(sql);
-            return ExcelDataTable(dt);
+            return dbImpl.ExecuteQuery(id, args);
         }
 
         /// <summary>
@@ -67,12 +59,7 @@ namespace HiCSControl
         /// <returns></returns>
         public static int ExecuteNoQuery(string id, IDictionary<string, string> mp = null)
         {
-            SqlInfo sql = SQLProxy.GetSqlInfo(id, (string propertyName, ref object objVal) =>
-            {
-                objVal = mp[propertyName];
-                return objVal != null;
-            });
-            return DB.ExecuteNonQuery(sql.SQL, sql.Parameters);
+            return dbImpl.ExecuteNoQuery(id, mp);
         }
 
         /// <summary>
@@ -84,13 +71,7 @@ namespace HiCSControl
         /// <returns></returns>
         public static int ExecuteNoQuery(string id, IDictionary<string, string> mp, params object[] args)
         {
-            SqlInfo info = SQLProxy.GetSqlInfo(id, (string propertyName, ref object objVal) =>
-            {
-                objVal = mp[propertyName];
-                return objVal != null;
-            });
-            string sql = string.Format(info.SQL, args);
-            return DB.ExecuteNonQuery(sql, info.Parameters);
+            return dbImpl.ExecuteNoQuery(id, mp, args);
         }
 
         /// <summary>
@@ -100,7 +81,7 @@ namespace HiCSControl
         /// <returns></returns>
         public static int ExecuteNoQuery8SQL(string sql)
         {
-            return DB.ExecuteNonQuery(sql);
+            return dbImpl.ExecuteNoQuery8SQL(sql);
         }
 
        /// <summary>
@@ -110,48 +91,7 @@ namespace HiCSControl
        /// <returns></returns>
         public static int ExecuteScalarInt8SQL(string sql)
         {
-            object obj = DB.ExecuteScalar(sql);
-            if (obj is DBNull || obj == null)
-            {
-                return -1;
-            }
-
-            try
-            {
-                return Convert.ToInt32(obj);
-            }
-            catch(Exception ex)
-            {
-                ex.ToString();
-                return -1;
-            }
-        }
-
-        private static DataTable ExcelDataTable(DataTable dt)
-        {
-            if (ProvidConfig.DBType != DBOperate.OLEDB)
-            {
-                return dt;
-            }
-            DataTable dtNew = new DataTable();
-            foreach(DataColumn cl in dt.Columns)
-            {
-                dtNew.Columns.Add(cl.ColumnName);
-            }
-
-            foreach(DataRow dr in dt.Rows)
-            {
-                DataRow drNew = dtNew.NewRow();
-
-                foreach (DataColumn cl in dt.Columns)
-                {
-                    drNew[cl.ColumnName] = Convert.ToString(dr[cl.ColumnName]);
-                }
-
-                dtNew.Rows.Add(drNew);
-            }
-
-            return dtNew;
+            return dbImpl.ExecuteScalarInt8SQL(sql);
         }
     }
 }
