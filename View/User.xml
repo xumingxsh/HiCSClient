@@ -97,5 +97,65 @@
                   }
                   ]
         </Text>
+        <Text id="Production.DGV_Materials_noChk">
+                  [
+                  {
+                  "ColumnID":"Name",
+                  "ColumnText":"名称",
+                  "ColumnName":"Name",
+                  "WidthPercent":40,
+                  "Align":"left",
+                  "IsShow":1
+                  },
+                  {
+                  "ColumnID":"Model",
+                  "ColumnText":"型号",
+                  "ColumnName":"Model",
+                  "WidthPercent":30,
+                  "Align":"left",
+                  "IsShow":1
+                  },
+                  {
+                  "ColumnID":"Count",
+                  "ColumnText":"数量",
+                  "ColumnName":"Count",
+                  "Width":40,
+                  "Align":"center",
+                  "IsShow":1
+                  },
+                  {
+                  "ColumnID":"Other",
+                  "ColumnText":"操作",
+                  "ColumnName":"",
+                  "WidthPercent":30,
+                  "Align":"left",
+                  "IsShow":1
+                  },
+                  {
+                  "ColumnID":"ProductID",
+                  "ColumnText":"",
+                  "ColumnName":"ProductID",
+                  "WidthPercent":0,
+                  "Align":"center",
+                  "IsShow":0
+                  },
+                  {
+                  "ColumnID":"ProcessId",
+                  "ColumnText":"",
+                  "ColumnName":"ProcessId",
+                  "WidthPercent":0,
+                  "Align":"center",
+                  "IsShow":0
+                  },
+                  {
+                  "ColumnID":"MaterialID",
+                  "ColumnText":"",
+                  "ColumnName":"MaterialID",
+                  "WidthPercent":0,
+                  "Align":"center",
+                  "IsShow":0
+                  }
+                  ]
+        </Text>
     </MODULE>
 </Root>

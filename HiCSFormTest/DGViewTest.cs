@@ -22,7 +22,7 @@ namespace HiCSFormTest
 
         private void DGViewTest_Load(object sender, EventArgs e)
         {
-            helper.Init(dgvView, HiCSUserControl.ViewConfig.GetView("Production.DGV_Materials"), true, true);
+            helper.Init(dgvView, HiCSUserControl.ViewConfig.GetView("Production.DGV_Materials_noChk"), true, true);
             helper.SetRowColor(System.Drawing.Color.White,
                 System.Drawing.Color.FromArgb(192, 192, 192),
                 System.Drawing.Color.FromArgb(219, 229, 241),

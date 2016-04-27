@@ -37,38 +37,19 @@ namespace HiCSUIHelper
                 it.DipplayIndex = index;
                 index++;
             }
-            isUsingCheck = usingCheck;
-            bool result = Init(dgv);
+            bool result = Init(dgv, usingCheck);
 
-            if (!isUsingCheck)  
-            {
-                isUsingCheck = ColumnHasChk();
-            }
-            if (isUsingCheck)
+            if (usingCheck || ColumnHasChk())   // 用户自己添加的列不需要自动添加相关事件
             {
                 dgv.CellClick += DGViewEvent.CheckCellClick; // 设置多选控件事件
             }
-            isUsingNo = usingNo;
-            if (isUsingNo)
+
+            if (usingNo)
             {
                 DGViewUtil.SetRowNo(dgv);
             }
             return true;
         }
-
-        private int chkWidth = 20;
-        private bool useHead = false;
-        private string hedText = "";
-        private bool isCheckLast = false;
-
-        public void SetChkColumn(bool isLast, bool isHeadCheck, int width = 20, string headText = "")
-        {
-            isCheckLast = isLast;
-            useHead = isHeadCheck;
-            chkWidth = width;
-            hedText = headText;
-        }
-
 
         System.Drawing.Color defColor;
         System.Drawing.Color altColor;
@@ -206,19 +187,16 @@ namespace HiCSUIHelper
                 width -= myDGV.RowHeadersWidth;
             }
 
-            int startIndex = 0;
             if (checkColumn != null)
             {
-                if (!ColumnHasChk())    // 如果列是自己创建的,则需要先取出该列的宽度,再计算控件百分比
-                {
-                    width -= checkColumn.Width;
-                    if (!isCheckLast)   // 如果列是在最欠扁,则显示顺序需要加一
-                    {
-                        startIndex++;
-                    }
-                }
-
                 CheckBoxIndex = checkColumn.Index;
+            }
+
+            int startIndex = 0;  
+            if (IsAutoCreateChkColumn())
+            {
+                width -= checkColumn.Width;
+                startIndex++;
             }
 
             int pinWidth = DGVColumnInfo.GetWidths(clsList);
@@ -233,6 +211,12 @@ namespace HiCSUIHelper
             DGVColumnInfo.ControlsResize(clsList, width, startIndex);   // 重新设置列宽度
         }
 
+        private bool IsAutoCreateChkColumn()
+        {
+            return checkColumn != null && checkColumn.DisplayIndex == 0 &&
+                checkColumn.HeaderCell is DatagridViewCheckBoxHeaderCell && !ColumnHasChk();
+        }
+
         /// <summary>
         /// 初始化控件
         /// </summary>
@@ -240,7 +224,7 @@ namespace HiCSUIHelper
         /// <param name="dgv"></param>
         /// <param name="cls"></param>
         /// <returns></returns>
-        private bool Init(DataGridView dgv)
+        private bool Init(DataGridView dgv, bool isUsingCheck)
         {
             if (dgv == null)
             {
@@ -254,41 +238,13 @@ namespace HiCSUIHelper
 
             InitExistColumns8Tag(dgv); // 对已存在的列进行处理
 
-            foreach (var it in columns.Values)
+            if (CheckBoxIndex < 0 && isUsingCheck && !ColumnHasChk())  // 并创建多选列
             {
-                if (it.Type.ToLower().Equals("chk") || 
-                    it.Type.ToLower().Equals("chk_head"))
-                {
-                    isUsingCheck = false;
-                    break;
-                }
-            }
-
-            if (CheckBoxIndex < 0 && isUsingCheck)  // 并创建多选列
-            {
-                checkColumn = DGViewUtil.CreateCheckBoxColumn(chkWidth, useHead);
-                if (!string.IsNullOrEmpty(hedText))
-                {
-                    checkColumn.HeaderText = hedText;
-                }
-            }
-
-            if (!isCheckLast && checkColumn != null)
-			{				
+                checkColumn = DGViewUtil.CreateCheckBoxColumn(20, true);
                 myDGV.Columns.Add(checkColumn);
-			}
+            }
 
             CreateColumnsAndInit(dgv);// 创建不存在的列并设置相关信息
-
-            if (isCheckLast && checkColumn != null)
-			{				
-                myDGV.Columns.Add(checkColumn);
-			}
-
-            if (checkColumn != null)
-            {
-                isUsingCheck = true;
-            }
 			
             OnResize();     // 设置列宽
             return true;
@@ -365,8 +321,6 @@ namespace HiCSUIHelper
         private Dictionary<string, DGVColumnInfo> columns = new Dictionary<string, DGVColumnInfo>();
         private List<DGVColumnInfo> clsList = new List<DGVColumnInfo>(); // 存储的列扩展信息
         private DataGridView myDGV;
-        private bool isUsingNo = false;     // 是否使用行编号
-        private bool isUsingCheck = false;  // 是否使用多选列
         private DataGridViewCheckBoxColumn checkColumn = null;  // 多选列
         private int CheckBoxIndex = -1; // 多选列索引号
     }
