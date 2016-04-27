@@ -124,7 +124,6 @@ namespace HiCSControl
             users.Clear();
         }
 
-
         BindingList<UserInfo> users = new BindingList<UserInfo>();
     }
 }

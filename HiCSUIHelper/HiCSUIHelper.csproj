@@ -44,13 +44,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\DGViewHelper.cs" />
-    <Compile Include="Common\DGViewUtil.cs" />
-    <Compile Include="Common\FormWrap.cs" />
-    <Compile Include="Common\Impl\DatagridViewCheckBoxHeaderCell.cs" />
-    <Compile Include="Common\Impl\DGVColumnInfo.cs" />
-    <Compile Include="Common\Impl\DGViewEvent.cs" />
-    <Compile Include="Common\Util\MsgBoxHelper.cs" />
+    <Compile Include="DGView\DGViewHelper.cs" />
+    <Compile Include="DGView\DGViewUtil.cs" />
+    <Compile Include="Form\FormWrap.cs" />
+    <Compile Include="DGView\Impl\DatagridViewCheckBoxHeaderCell.cs" />
+    <Compile Include="DGView\Impl\DGVColumnInfo.cs" />
+    <Compile Include="DGView\DGViewEvent.cs" />
+    <Compile Include="Util\MsgBoxHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

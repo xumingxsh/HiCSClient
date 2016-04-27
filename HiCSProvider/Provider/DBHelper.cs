@@ -14,7 +14,7 @@ namespace HiCSProvider
     {
         static RestHelperImpl rest = new RestHelperImpl();
         static DBHelperImpl db = new DBHelperImpl();
-        static IProviderHelper dbImpl
+        static IProviderHelper Impl
         {
             get
             {
@@ -37,7 +37,7 @@ namespace HiCSProvider
         /// <returns></returns>
         public static DataTable ExecuteQuery(string id, IDictionary<string, string> mp = null)
         {
-            return dbImpl.ExecuteQuery(id, mp);
+            return Impl.ExecuteQuery(id, mp);
         }
 
         /// <summary>
@@ -48,7 +48,7 @@ namespace HiCSProvider
         /// <returns></returns>
         public static DataTable ExecuteQuery(string id, params object[] args)
         {
-            return dbImpl.ExecuteQuery(id, args);
+            return Impl.ExecuteQuery(id, args);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace HiCSProvider
         /// <returns></returns>
         public static int ExecuteNoQuery(string id, IDictionary<string, string> mp = null)
         {
-            return dbImpl.ExecuteNoQuery(id, mp);
+            return Impl.ExecuteNoQuery(id, mp);
         }
 
         /// <summary>
@@ -71,7 +71,7 @@ namespace HiCSProvider
         /// <returns></returns>
         public static int ExecuteNoQuery(string id, IDictionary<string, string> mp, params object[] args)
         {
-            return dbImpl.ExecuteNoQuery(id, mp, args);
+            return Impl.ExecuteNoQuery(id, mp, args);
         }
 
         /// <summary>
@@ -81,7 +81,7 @@ namespace HiCSProvider
         /// <returns></returns>
         public static int ExecuteNoQuery8SQL(string sql)
         {
-            return dbImpl.ExecuteNoQuery8SQL(sql);
+            return Impl.ExecuteNoQuery8SQL(sql);
         }
 
        /// <summary>
@@ -91,7 +91,7 @@ namespace HiCSProvider
        /// <returns></returns>
         public static int ExecuteScalarInt8SQL(string sql)
         {
-            return dbImpl.ExecuteScalarInt8SQL(sql);
+            return Impl.ExecuteScalarInt8SQL(sql);
         }
     }
 }

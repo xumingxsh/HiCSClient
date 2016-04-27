@@ -6,8 +6,9 @@ namespace HiCSUIHelper
 {
     /// <summary>
     /// DataGridView事件实现
+    /// XuminRong 2016.04.03
     /// </summary>
-    static class DGViewEvent
+    public static class DGViewEvent
     {
         /// <summary>
         /// 设置行编号及相关事件
@@ -92,7 +93,7 @@ namespace HiCSUIHelper
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private static void CheckCellClick(object sender, DataGridViewCellEventArgs e)
+        public static void CheckCellClick(object sender, DataGridViewCellEventArgs e)
         {
             DataGridView dgv = sender as DataGridView;
             if (dgv == null)

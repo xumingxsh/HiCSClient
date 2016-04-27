@@ -4,6 +4,10 @@ using System.Windows.Forms;
 
 namespace HiCSUIHelper
 {
+    /// <summary>
+    /// DataGridView辅助类,主要用于设置列,获取表格值等公用操作.
+    /// XuminRong 2016.04.03
+    /// </summary>
     public static class DGViewUtil
     {
         /// <summary>

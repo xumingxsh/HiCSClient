@@ -21,25 +21,32 @@ namespace HiCSUIHelper
         /// <returns></returns>
         public bool Init(DataGridView dgv, string json, bool usingCheck = false, bool usingNo = false)
         {
-            List<DGVColumnInfo> lst = null;
             if (!string.IsNullOrWhiteSpace(json))
             {
-                lst = HiCSUtil.Json.Json2Obj<List<DGVColumnInfo>>(json);
+                clsList = HiCSUtil.Json.Json2Obj<List<DGVColumnInfo>>(json);
             }
             else
             {
-                lst = new List<DGVColumnInfo>();
+                clsList = new List<DGVColumnInfo>();
+            }
+
+            int index = 0;
+            foreach (var it in clsList)
+            {
+                columns[it.ColumnID] = it;
+                it.DipplayIndex = index;
+                index++;
             }
             isUsingCheck = usingCheck;
-            bool result = Init(dgv, lst);
+            bool result = Init(dgv);
 
-            if (!isUsingCheck)
+            if (!isUsingCheck)  
             {
                 isUsingCheck = ColumnHasChk();
             }
             if (isUsingCheck)
             {
-                DGViewEvent.SetCheckColumns(dgv);
+                dgv.CellClick += DGViewEvent.CheckCellClick; // 设置多选控件事件
             }
             isUsingNo = usingNo;
             if (isUsingNo)
@@ -53,6 +60,7 @@ namespace HiCSUIHelper
         private bool useHead = false;
         private string hedText = "";
         private bool isCheckLast = false;
+
         public void SetChkColumn(bool isLast, bool isHeadCheck, int width = 20, string headText = "")
         {
             isCheckLast = isLast;
@@ -201,30 +209,19 @@ namespace HiCSUIHelper
             int startIndex = 0;
             if (checkColumn != null)
             {
-                if (!ColumnHasChk())
+                if (!ColumnHasChk())    // 如果列是自己创建的,则需要先取出该列的宽度,再计算控件百分比
                 {
                     width -= checkColumn.Width;
-                    if (!isCheckLast)
+                    if (!isCheckLast)   // 如果列是在最欠扁,则显示顺序需要加一
                     {
                         startIndex++;
                     }
                 }
 
-                if (CheckBoxIndex < 0)
-                {
-                    CheckBoxIndex = checkColumn.Index;
-                }
+                CheckBoxIndex = checkColumn.Index;
             }
 
-            int pinWidth = 0;
-
-            foreach (var it in clsList)
-            {
-                if (it.Column.Width > 0)
-                {
-                    pinWidth += it.Column.Width;
-                }
-            }
+            int pinWidth = DGVColumnInfo.GetWidths(clsList);
 
             width -= pinWidth;
 
@@ -233,37 +230,7 @@ namespace HiCSUIHelper
                 width = myDGV.Size.Width;
             }
 
-            foreach (var it in clsList)
-            {
-                if (it.Column.Width > 0)
-                {
-                    it.Control.Width = it.Column.Width;
-                }
-                else
-                {
-                    it.Control.Width = (width * it.Column.WidthPercent) / 100;
-                }
-                it.Control.DisplayIndex = it.DipplayIndex + startIndex;
-                if (it.Column.Align != null)
-                {
-                    string align = it.Column.Align.Trim().ToLower();
-                    if (align.Equals("left"))
-                    {
-                        it.Control.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                        it.Control.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleLeft;
-                    }
-                    if (align.Equals("right"))
-                    {
-                        it.Control.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
-                        it.Control.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleRight;
-                    }
-                    if (align.Equals("center"))
-                    {
-                        it.Control.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                        it.Control.HeaderCell.Style.Alignment = DataGridViewContentAlignment.MiddleCenter;
-                    }
-                }
-            }
+            DGVColumnInfo.ControlsResize(clsList, width, startIndex);   // 重新设置列宽度
         }
 
         /// <summary>
@@ -273,9 +240,9 @@ namespace HiCSUIHelper
         /// <param name="dgv"></param>
         /// <param name="cls"></param>
         /// <returns></returns>
-        private bool Init(DataGridView dgv, List<DGVColumnInfo> cls)
+        private bool Init(DataGridView dgv)
         {
-            if (dgv == null || cls == null)
+            if (dgv == null)
             {
                 return false;
             }
@@ -284,24 +251,13 @@ namespace HiCSUIHelper
             dgv.AutoGenerateColumns = false;
             dgv.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCellsExceptHeaders;
             dgv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            columns.Clear();
-            clsList.Clear();
-            int index = 0;
-            foreach(var it in cls)
-            {
-                DGVColumnInfoEx ex = new DGVColumnInfoEx(it);
-                columns[it.ColumnID] = ex;
-                ex.DipplayIndex = index;
-                index++;
-                clsList.Add(ex);
-            }
 
             InitExistColumns8Tag(dgv); // 对已存在的列进行处理
 
             foreach (var it in columns.Values)
             {
-                if (it.Column.Type.ToLower().Equals("chk") || 
-                    it.Column.Type.ToLower().Equals("chk_head"))
+                if (it.Type.ToLower().Equals("chk") || 
+                    it.Type.ToLower().Equals("chk_head"))
                 {
                     isUsingCheck = false;
                     break;
@@ -328,6 +284,11 @@ namespace HiCSUIHelper
 			{				
                 myDGV.Columns.Add(checkColumn);
 			}
+
+            if (checkColumn != null)
+            {
+                isUsingCheck = true;
+            }
 			
             OnResize();     // 设置列宽
             return true;
@@ -343,8 +304,8 @@ namespace HiCSUIHelper
             initHasChk = "0";
             foreach (var it in columns.Values)
             {
-                if (it.Column.Type.ToLower().Equals("chk") ||
-                    it.Column.Type.ToLower().Equals("chk_head"))
+                if (it.Type.ToLower().Equals("chk") ||
+                    it.Type.ToLower().Equals("chk_head"))
                 {
                     initHasChk = "1";
                     break;
@@ -366,7 +327,7 @@ namespace HiCSUIHelper
                     key = it.Name;
                 }
 
-                DGVColumnInfoEx ex = null;
+                DGVColumnInfo ex = null;
                 if (!columns.TryGetValue(key, out ex))
                 {
                     continue;
@@ -394,67 +355,19 @@ namespace HiCSUIHelper
         /// </summary>
         private void CreateColumnsAndInit(DataGridView dgv)
         {
-            foreach (var it in columns.Values)
+            DataGridViewCheckBoxColumn chk = DGVColumnInfo.CreateAndInitControls(clsList, dgv);
+            if (chk != null)
             {
-                if (it.Control != null)
-                {
-                    continue;
-                }
-
-                if (it.Column.Type.ToLower().Equals("chk"))
-                {
-                    checkColumn = DGViewUtil.CreateCheckBoxColumn();
-                    it.Control = checkColumn;
-                    dgv.Columns.Add(checkColumn);
-                }
-                else if (it.Column.Type.ToLower().Equals("chk_head"))
-                {
-                    checkColumn = DGViewUtil.CreateCheckBoxColumn(20, true);
-                    it.Control = checkColumn;
-                    dgv.Columns.Add(checkColumn);
-                }
-                else
-                {
-                    DataGridViewColumn ex = new DataGridViewTextBoxColumn();
-                    ex.Tag = it.Column.ColumnID;
-                    if (it.Column.IsShow == 0)
-                    {
-                        ex.Visible = false;
-                    }
-                    ex.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                    it.Control = ex;
-                    dgv.Columns.Add(ex);
-                }
-            }
-
-            foreach (var it in columns.Values)
-            {
-                it.Control.HeaderText = it.Column.ColumnText;
-                it.Control.DataPropertyName = it.Column.ColumnName;
-                it.Control.Name = it.Column.ColumnID;
+                checkColumn = chk;
             }
         }
 
-        private Dictionary<string, DGVColumnInfoEx> columns = new Dictionary<string, DGVColumnInfoEx>();
-        private List<DGVColumnInfoEx> clsList = new List<DGVColumnInfoEx>(); // 存储的列扩展信息
+        private Dictionary<string, DGVColumnInfo> columns = new Dictionary<string, DGVColumnInfo>();
+        private List<DGVColumnInfo> clsList = new List<DGVColumnInfo>(); // 存储的列扩展信息
         private DataGridView myDGV;
         private bool isUsingNo = false;     // 是否使用行编号
         private bool isUsingCheck = false;  // 是否使用多选列
         private DataGridViewCheckBoxColumn checkColumn = null;  // 多选列
         private int CheckBoxIndex = -1; // 多选列索引号
-
-        /// <summary>
-        /// 列信息扩展
-        /// </summary>
-        class DGVColumnInfoEx
-        {
-            public DGVColumnInfoEx(DGVColumnInfo cl)
-            {
-                Column = cl;
-            }
-            public DGVColumnInfo Column { get; set; }       // 列信息
-            public DataGridViewColumn Control { get; set; } // 对应的实际列
-            public int DipplayIndex { get; set; }           // 显示顺序
-        }
     }
 }
