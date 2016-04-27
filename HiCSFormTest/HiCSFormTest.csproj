@@ -45,6 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DGViewTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DGViewTest.Designer.cs">
+      <DependentUpon>DGViewTest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -71,6 +77,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DGViewTest.resx">
+      <DependentUpon>DGViewTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
@@ -109,6 +118,14 @@
     <ProjectReference Include="..\HiCSModel\HiCSModel.csproj">
       <Project>{ba91ee53-3d9e-4672-8f91-6336fa25e858}</Project>
       <Name>HiCSModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HiCSProvider\HiCSProvider.csproj">
+      <Project>{43c2740d-83c2-4976-a2ed-0cad161cfbac}</Project>
+      <Name>HiCSProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HiCSUIHelper\HiCSUIHelper.csproj">
+      <Project>{f48d96f1-9e81-405c-8db7-e0759c650bf6}</Project>
+      <Name>HiCSUIHelper</Name>
     </ProjectReference>
     <ProjectReference Include="..\HiCSUserControl\HiCSUserControl.csproj">
       <Project>{88786F33-0C53-46E5-9D92-B4A926423826}</Project>

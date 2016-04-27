@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace HiCSUserControl
+namespace HiCSUIHelper
 {
     /// <summary>
     /// 多选框列头类

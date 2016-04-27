@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{F58ED24C-DA0A-43CE-9D59-D2AD5C29C7DA}</ProjectGuid>
+    <ProjectGuid>{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>HiCSControl</RootNamespace>
-    <AssemblyName>HiCSControl</AssemblyName>
+    <RootNamespace>HiCSProvider</RootNamespace>
+    <AssemblyName>HiCSProvider</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -30,51 +30,41 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HiCSDB, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\lib\HiCSDB.dll</HintPath>
+    <Reference Include="HiCSDB">
+      <HintPath>..\lib\HiCSDB.dll</HintPath>
     </Reference>
-    <Reference Include="HiCSSQL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\lib\HiCSSQL.dll</HintPath>
+    <Reference Include="HiCSSQL">
+      <HintPath>..\lib\HiCSSQL.dll</HintPath>
     </Reference>
-    <Reference Include="HiCSUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="HiCSUtil">
       <HintPath>..\lib\HiCSUtil.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
-    <Reference Include="MySql.Data, Version=6.9.5.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MySql.Data">
       <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\lib\MySql.Data.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Net" />
-    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Control\UserLoginControl.cs" />
+    <Compile Include="DB\DBHelper.cs" />
+    <Compile Include="DB\Impl\DBHelperImpl.cs" />
+    <Compile Include="DB\Impl\IProviderHelper.cs" />
+    <Compile Include="DB\Impl\RestHelperImpl.cs" />
+    <Compile Include="DB\Impl\RestHepler.cs" />
+    <Compile Include="DB\ProvidConfig.cs" />
+    <Compile Include="DB\UserConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Test\UnitTest_Login.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\HiCSModel\HiCSModel.csproj">
-      <Project>{ba91ee53-3d9e-4672-8f91-6336fa25e858}</Project>
-      <Name>HiCSModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HiCSProvider\HiCSProvider.csproj">
-      <Project>{43c2740d-83c2-4976-a2ed-0cad161cfbac}</Project>
-      <Name>HiCSProvider</Name>
-    </ProjectReference>
+    <Compile Include="Test\UnitTest_RestImpl.cs" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

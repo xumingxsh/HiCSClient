@@ -24,9 +24,9 @@ Extended Properties=Excel 8.0;
 data source=" + path + "/edqdb.xls";
 
 
-            HiCSUserControl.UserConfig.Init(2, conn, path + "/xmls");
-            HiCSUserControl.UserConfig.ViewXmlFolder = topDir.FullName + "/View";
-            HiCSUserControl.UserConfig.SetUri("http://localhost:49653");
+            HiCSProvider.UserConfig.Init(2, conn, path + "/xmls");
+            HiCSUserControl.ViewConfig.ViewXmlFolder = topDir.FullName + "/View";
+            //HiCSProvider.UserConfig.SetUri("http://localhost:49653");
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);

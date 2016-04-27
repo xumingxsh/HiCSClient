@@ -2,12 +2,12 @@
 
 using HiCSSQL;
 
-namespace HiCSControl
+namespace HiCSProvider
 {
     /// <summary>
     /// 数据库相关配置类
     /// </summary>
-    public class ProvidConfig
+    class ProvidConfig
     {
         /// <summary>
         /// 数据库类型

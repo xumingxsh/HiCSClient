@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HiCSUserControl
+namespace HiCSProvider
 {
     /// <summary>
     /// 用户配置类
@@ -16,14 +16,14 @@ namespace HiCSUserControl
         /// <param name="xmlFolder">xml文件夹</param>
         public static void Init(int dbType, string conn, string xmlFolder)
         {
-            HiCSControl.UserConfig.Init(dbType, conn, xmlFolder);
+            ProvidConfig.Conn = conn;
+            ProvidConfig.XMLFolder = xmlFolder;
+            ProvidConfig.DBType = dbType;
         }
 
         public static void SetUri(string uri)
         {
-            HiCSControl.UserConfig.SetUri(uri);
+            HiCSProvider.DB.Impl.RestHepler.RemoteURI = uri;
         }
-
-        public static string ViewXmlFolder { set; get; }
     }
 }

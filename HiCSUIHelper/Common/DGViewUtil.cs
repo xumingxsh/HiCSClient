@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace HiCSUserControl
+namespace HiCSUIHelper
 {
     public static class DGViewUtil
     {
@@ -34,7 +34,7 @@ namespace HiCSUserControl
             DataGridViewCheckBoxColumn checkColumn = new DataGridViewCheckBoxColumn();
             checkColumn.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
             checkColumn.Width = width;
-            checkColumn.DisplayIndex = 0;
+            //checkColumn.DisplayIndex = 0;
             checkColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.None;
 
             if (createHead)

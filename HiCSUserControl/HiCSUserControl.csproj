@@ -56,10 +56,6 @@
     <Reference Include="System.XML" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\DGViewUtil.cs" />
-    <Compile Include="Common\Impl\DatagridViewCheckBoxHeaderCell.cs" />
-    <Compile Include="Common\Impl\DGVColumnInfo.cs" />
-    <Compile Include="Common\Impl\DGViewEvent.cs" />
     <Compile Include="Config\ViewConfig.cs" />
     <Compile Include="ProcessMaterial.cs">
       <SubType>UserControl</SubType>
@@ -67,15 +63,11 @@
     <Compile Include="ProcessMaterial.Designer.cs">
       <DependentUpon>ProcessMaterial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Common\DGViewHelper.cs" />
-    <Compile Include="Common\FormWrap.cs" />
     <Compile Include="Test\Common\UnitTest_DGViewHelper.cs" />
     <Compile Include="Test\Common\UnitTest_FormWrap.cs" />
     <Compile Include="Test\UnitTest_Login.cs" />
     <Compile Include="Test\UnitTest_ProcessMaterial.cs" />
-    <Compile Include="Config\UserConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Common\Util\MsgBoxHelper.cs" />
     <Compile Include="UserLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -110,6 +102,14 @@
     <ProjectReference Include="..\HiCSModel\HiCSModel.csproj">
       <Project>{ba91ee53-3d9e-4672-8f91-6336fa25e858}</Project>
       <Name>HiCSModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HiCSProvider\HiCSProvider.csproj">
+      <Project>{43c2740d-83c2-4976-a2ed-0cad161cfbac}</Project>
+      <Name>HiCSProvider</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\HiCSUIHelper\HiCSUIHelper.csproj">
+      <Project>{f48d96f1-9e81-405c-8db7-e0759c650bf6}</Project>
+      <Name>HiCSUIHelper</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

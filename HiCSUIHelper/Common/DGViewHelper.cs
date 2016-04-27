@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 
-namespace HiCSUserControl.Common
+namespace HiCSUIHelper
 { 
     /// <summary>
     /// 使用配置文件设置列名，显示标题，列宽度（支持绝对宽度和百分比）
@@ -19,7 +19,7 @@ namespace HiCSUserControl.Common
         /// <param name="usingCheck">是否使用复选列</param>
         /// <param name="usingNo">是否使用编号</param>
         /// <returns></returns>
-        public bool Init(ContainerControl form, DataGridView dgv, string json, bool usingCheck = false, bool usingNo = false)
+        public bool Init(DataGridView dgv, string json, bool usingCheck = false, bool usingNo = false)
         {
             List<DGVColumnInfo> lst = null;
             if (!string.IsNullOrWhiteSpace(json))
@@ -31,9 +31,13 @@ namespace HiCSUserControl.Common
                 lst = new List<DGVColumnInfo>();
             }
             isUsingCheck = usingCheck;
-            bool result = Init(form, dgv, lst);
+            bool result = Init(dgv, lst);
 
-            if (usingCheck)
+            if (!isUsingCheck)
+            {
+                isUsingCheck = ColumnHasChk();
+            }
+            if (isUsingCheck)
             {
                 DGViewEvent.SetCheckColumns(dgv);
             }
@@ -44,6 +48,19 @@ namespace HiCSUserControl.Common
             }
             return true;
         }
+
+        private int chkWidth = 20;
+        private bool useHead = false;
+        private string hedText = "";
+        private bool isCheckLast = false;
+        public void SetChkColumn(bool isLast, bool isHeadCheck, int width = 20, string headText = "")
+        {
+            isCheckLast = isLast;
+            useHead = isHeadCheck;
+            chkWidth = width;
+            hedText = headText;
+        }
+
 
         System.Drawing.Color defColor;
         System.Drawing.Color altColor;
@@ -184,8 +201,14 @@ namespace HiCSUserControl.Common
             int startIndex = 0;
             if (checkColumn != null)
             {
-                width -= checkColumn.Width;
-                startIndex++;
+                if (!ColumnHasChk())
+                {
+                    width -= checkColumn.Width;
+                    if (!isCheckLast)
+                    {
+                        startIndex++;
+                    }
+                }
 
                 if (CheckBoxIndex < 0)
                 {
@@ -250,9 +273,9 @@ namespace HiCSUserControl.Common
         /// <param name="dgv"></param>
         /// <param name="cls"></param>
         /// <returns></returns>
-        private bool Init(ContainerControl form, DataGridView dgv, List<DGVColumnInfo> cls)
+        private bool Init(DataGridView dgv, List<DGVColumnInfo> cls)
         {
-            if (form == null || dgv == null || cls == null)
+            if (dgv == null || cls == null)
             {
                 return false;
             }
@@ -275,15 +298,59 @@ namespace HiCSUserControl.Common
 
             InitExistColumns8Tag(dgv); // 对已存在的列进行处理
 
-            if (CheckBoxIndex < 0 && isUsingCheck)  // 并创建多选列
+            foreach (var it in columns.Values)
             {
-                checkColumn = DGViewUtil.CreateCheckBoxColumn();
-                myDGV.Columns.Add(checkColumn);
+                if (it.Column.Type.ToLower().Equals("chk") || 
+                    it.Column.Type.ToLower().Equals("chk_head"))
+                {
+                    isUsingCheck = false;
+                    break;
+                }
             }
 
+            if (CheckBoxIndex < 0 && isUsingCheck)  // 并创建多选列
+            {
+                checkColumn = DGViewUtil.CreateCheckBoxColumn(chkWidth, useHead);
+                if (!string.IsNullOrEmpty(hedText))
+                {
+                    checkColumn.HeaderText = hedText;
+                }
+            }
+
+            if (!isCheckLast && checkColumn != null)
+			{				
+                myDGV.Columns.Add(checkColumn);
+			}
+
             CreateColumnsAndInit(dgv);// 创建不存在的列并设置相关信息
+
+            if (isCheckLast && checkColumn != null)
+			{				
+                myDGV.Columns.Add(checkColumn);
+			}
+			
             OnResize();     // 设置列宽
             return true;
+        }
+
+        private string initHasChk = null;
+        private bool ColumnHasChk()
+        {
+            if (initHasChk != null)
+            {
+                return initHasChk.Equals("1");
+            }
+            initHasChk = "0";
+            foreach (var it in columns.Values)
+            {
+                if (it.Column.Type.ToLower().Equals("chk") ||
+                    it.Column.Type.ToLower().Equals("chk_head"))
+                {
+                    initHasChk = "1";
+                    break;
+                }
+            }
+            return initHasChk.Equals("1"); 
         }
 
         /// <summary>
@@ -334,15 +401,30 @@ namespace HiCSUserControl.Common
                     continue;
                 }
 
-                DataGridViewColumn ex = new DataGridViewTextBoxColumn();
-                ex.Tag = it.Column.ColumnID;
-                if (it.Column.IsShow == 0)
+                if (it.Column.Type.ToLower().Equals("chk"))
                 {
-                    ex.Visible = false;
+                    checkColumn = DGViewUtil.CreateCheckBoxColumn();
+                    it.Control = checkColumn;
+                    dgv.Columns.Add(checkColumn);
                 }
-                ex.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                it.Control = ex;
-                dgv.Columns.Add(ex);
+                else if (it.Column.Type.ToLower().Equals("chk_head"))
+                {
+                    checkColumn = DGViewUtil.CreateCheckBoxColumn(20, true);
+                    it.Control = checkColumn;
+                    dgv.Columns.Add(checkColumn);
+                }
+                else
+                {
+                    DataGridViewColumn ex = new DataGridViewTextBoxColumn();
+                    ex.Tag = it.Column.ColumnID;
+                    if (it.Column.IsShow == 0)
+                    {
+                        ex.Visible = false;
+                    }
+                    ex.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
+                    it.Control = ex;
+                    dgv.Columns.Add(ex);
+                }
             }
 
             foreach (var it in columns.Values)

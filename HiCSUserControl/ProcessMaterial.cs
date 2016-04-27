@@ -3,7 +3,8 @@ using System.Data;
 using System.Windows.Forms;
 
 using HiCSModel;
-using HiCSUserControl.Common;
+using HiCSUIHelper;
+using HiCSProvider;
 
 namespace HiCSUserControl
 {
@@ -44,7 +45,7 @@ namespace HiCSUserControl
             {
                 condition = " and MType='" + Convert.ToInt16(type) + "'";
             }
-            return HiCSControl.DBHelper.ExecuteQuery("ProductProvid.GetProductProcessMaterial_parm3", productID, processID, condition);
+            return DBHelper.ExecuteQuery("ProductProvid.GetProductProcessMaterial_parm3", productID, processID, condition);
         }
 
         /// <summary>
@@ -96,7 +97,9 @@ namespace HiCSUserControl
             System.Drawing.Font font = new System.Drawing.Font("宋体", 10);
             dgvMaterial.DefaultCellStyle.Font = font;
             dgvMaterial.RowHeadersDefaultCellStyle.Font = font;
-            dgvHelper.Init(this, dgvMaterial, ViewConfig.GetView("Production.DGV_Materials"), true, true);
+
+            dgvHelper.Init(dgvMaterial, ViewConfig.GetView("Production.DGV_Materials"), true, true);
+
             dgvHelper.SetRowColor(System.Drawing.Color.White,
                 System.Drawing.Color.FromArgb(192, 192, 192),
                 System.Drawing.Color.FromArgb(219, 229, 241),

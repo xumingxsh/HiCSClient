@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 
-namespace HiCSUserControl.Common
+namespace HiCSUIHelper
 {
     /// <summary>
     /// 列信息类

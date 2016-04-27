@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 
 using HiCSModel;
+using HiCSProvider;
 
 namespace HiCSControl
 {

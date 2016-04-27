@@ -170,6 +170,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tool\DBHelper.cs" />
+    <Compile Include="Tool\ParamsHelper.cs" />
     <Compile Include="Tool\ProvidConfig.cs" />
     <Compile Include="Tool\UserConfig.cs" />
   </ItemGroup>

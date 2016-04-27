@@ -8,7 +8,7 @@ namespace HiCSUserControl
     /// <summary>
     /// 展示配置获取类
     /// </summary>
-    static class ViewConfig
+    public static class ViewConfig
     {
         /// <summary>
         /// 获得基本展示配置对象
@@ -33,13 +33,15 @@ namespace HiCSUserControl
                 if (chchText == null)
                 {
                     chchText = new CachProxy<TextInfo>();
-                    chchText.LoadXMLs(UserConfig.ViewXmlFolder);
+                    chchText.LoadXMLs(ViewXmlFolder);
                 }
                 return chchText;
             }
         }
+        public static string ViewXmlFolder { set; get; }
 
         static CachProxy<TextInfo> chchText = null;
+
 
         class TextInfo : ICachItem
         {

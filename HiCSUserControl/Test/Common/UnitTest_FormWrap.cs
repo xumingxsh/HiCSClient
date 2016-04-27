@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-using HiCSUserControl.Common;
+using HiCSUIHelper;
 
 namespace HiCSUserControl.Test
 {

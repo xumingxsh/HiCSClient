@@ -11,6 +11,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSControl", "HiCSControl\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSUserControl", "HiCSUserControl\HiCSUserControl.csproj", "{88786F33-0C53-46E5-9D92-B4A926423826}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSUIHelper", "HiCSUIHelper\HiCSUIHelper.csproj", "{F48D96F1-9E81-405C-8DB7-E0759C650BF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSProvider", "HiCSProvider\HiCSProvider.csproj", "{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +37,14 @@ Global
 		{88786F33-0C53-46E5-9D92-B4A926423826}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88786F33-0C53-46E5-9D92-B4A926423826}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88786F33-0C53-46E5-9D92-B4A926423826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F48D96F1-9E81-405C-8DB7-E0759C650BF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F48D96F1-9E81-405C-8DB7-E0759C650BF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F48D96F1-9E81-405C-8DB7-E0759C650BF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F48D96F1-9E81-405C-8DB7-E0759C650BF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

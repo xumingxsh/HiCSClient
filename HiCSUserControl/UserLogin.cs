@@ -2,7 +2,7 @@
 using System.Windows.Forms;
 
 using HiCSControl;
-using HiCSUserControl.Common;
+using HiCSUIHelper;
 
 namespace HiCSUserControl
 {

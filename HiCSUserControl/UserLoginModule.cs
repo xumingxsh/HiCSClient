@@ -6,7 +6,8 @@ using System.ComponentModel;
 using HiCSControl;
 using HiCSModel;
 
-using HiCSUserControl.Common;
+using HiCSUIHelper;
+using HiCSProvider;
 
 namespace HiCSUserControl
 {
@@ -54,7 +55,7 @@ namespace HiCSUserControl
 
         private void UserLoginModule_Load(object sender, EventArgs e)
         {
-            dgvHelper.Init(this, dgvLoginUser, ViewConfig.GetView("User.DGV_LoginUsers"));
+            dgvHelper.Init(dgvLoginUser, ViewConfig.GetView("User.DGV_LoginUsers"));
         }
 
         private void btnLogin_Click(object sender, EventArgs e)

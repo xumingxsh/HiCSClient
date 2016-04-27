@@ -27,7 +27,7 @@
 		</Text>
     </MODULE>
 	
-    <MODULE script="用户相关模块显示信息">
+    <MODULE script="产品相关模块显示信息">
         <Text id="Production.DGV_Materials">
                   [
                   {
@@ -53,6 +53,15 @@
                   "Width":40,
                   "Align":"center",
                   "IsShow":1
+                  },
+                  {
+                  "ColumnID":"clCheck",
+                  "ColumnText":"",
+                  "ColumnName":"",
+                  "Width":40,
+                  "Align":"center",
+                  "IsShow":1,
+				  "Type":"chk_head"
                   },
                   {
                   "ColumnID":"Other",

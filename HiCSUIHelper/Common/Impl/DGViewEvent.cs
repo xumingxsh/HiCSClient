@@ -2,7 +2,7 @@
 using System.Drawing;
 using System.Windows.Forms;
 
-namespace HiCSUserControl
+namespace HiCSUIHelper
 {
     /// <summary>
     /// DataGridView事件实现

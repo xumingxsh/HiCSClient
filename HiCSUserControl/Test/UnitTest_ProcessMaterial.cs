@@ -28,7 +28,7 @@ namespace HiCSUserControl.Test
 Extended Properties=Excel 8.0;
 data source=" + path + "/edqdb.xls";
 
-            UserConfig.Init(2, conn, path + "/xmls");
+            HiCSProvider.UserConfig.Init(2, conn, path + "/xmls");
         }
     }
 }

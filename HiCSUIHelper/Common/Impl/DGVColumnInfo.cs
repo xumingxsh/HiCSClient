@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace HiCSUserControl
+namespace HiCSUIHelper
 {
     /// <summary>
     /// 列信息
@@ -19,6 +19,7 @@ namespace HiCSUserControl
         public DGVColumnInfo()
         {
             IsShow = 0;
+            Type = "text";
         }
         /// <summary>
         /// 列唯一标识
@@ -54,6 +55,11 @@ namespace HiCSUserControl
         /// 是否可见
         /// </summary>
         public int IsShow { set; get; }
+
+        /// <summary>
+        /// 列类型text:普通列,chk:多选列;chk_head:含头的多选列
+        /// </summary>
+        public string Type { set; get; }
 
     }
 }

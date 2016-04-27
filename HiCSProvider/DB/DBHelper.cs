@@ -2,9 +2,9 @@
 using System.Data;
 using System.Collections.Generic;
 
-using HiCSControl.DB.Impl;
+using HiCSProvider.DB.Impl;
 
-namespace HiCSControl
+namespace HiCSProvider
 {
     /// <summary>
     /// 数据库访问类
@@ -14,7 +14,7 @@ namespace HiCSControl
     {
         static RestHelperImpl rest = new RestHelperImpl();
         static DBHelperImpl db = new DBHelperImpl();
-        static IDBHelper dbImpl
+        static IProviderHelper dbImpl
         {
             get
             {
