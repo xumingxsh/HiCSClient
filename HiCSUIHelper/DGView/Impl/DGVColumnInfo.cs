@@ -152,6 +152,25 @@ namespace HiCSUIHelper
         }
 
         /// <summary>
+        /// 是否存在选择列
+        /// </summary>
+        /// <param name="lst"></param>
+        /// <returns></returns>
+        public static bool HasChkColumn(List<DGVColumnInfo> lst)
+        {
+            foreach (var it in lst)
+            {
+                if (it.Type.ToLower().Equals("chk") ||
+                    it.Type.ToLower().Equals("chk_head"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
         /// 控件改动时修改列宽度
         /// </summary>
         /// <param name="lst"></param>

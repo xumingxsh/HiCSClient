@@ -51,9 +51,7 @@ namespace HiCSUIHelper
             return true;
         }
 
-        System.Drawing.Color defColor;
-        System.Drawing.Color altColor;
-        System.Drawing.Color selColor;
+        DGViewRowColor rowsColorHelper = new DGViewRowColor();
 
         /// <summary>
         /// 设置行颜色
@@ -62,27 +60,9 @@ namespace HiCSUIHelper
         /// <param name="alter"></param>
         /// <param name="select"></param>
         /// <param name="current"></param>
-        public void SetRowColor(System.Drawing.Color def, System.Drawing.Color alter, System.Drawing.Color select, System.Drawing.Color current)
+        public void SetRowColor(System.Drawing.Color def, System.Drawing.Color alter, System.Drawing.Color current, System.Drawing.Color select)
         {
-            if (myDGV == null)
-            {
-                return;
-            }
-
-            defColor = def;
-            altColor = alter;
-            selColor = select;
-
-            if (CheckBoxIndex < 0)
-            {
-                SetRowColor(defColor, altColor, selColor);
-            }
-            else
-            {
-                myDGV.DefaultCellStyle.SelectionBackColor = current;
-                myDGV.AlternatingRowsDefaultCellStyle.SelectionBackColor = current;
-                myDGV.RowPostPaint += SetRowColor_Evt;
-            }
+            rowsColorHelper.SetRowColor(myDGV, CheckBoxIndex, def, alter, current, select);
         }
 
         /// <summary>
@@ -91,51 +71,9 @@ namespace HiCSUIHelper
         /// <param name="def"></param>
         /// <param name="alter"></param>
         /// <param name="select"></param>
-        public void SetRowColor(System.Drawing.Color def, System.Drawing.Color alter, System.Drawing.Color select)
+        public void SetRowColor(System.Drawing.Color def, System.Drawing.Color alter, System.Drawing.Color current)
         {
-            if (myDGV == null)
-            {
-                return;
-            }
-            defColor = def;
-            altColor = alter;
-            selColor = select;
-            myDGV.DefaultCellStyle.BackColor = def;
-            myDGV.AlternatingRowsDefaultCellStyle.BackColor = alter;
-            myDGV.DefaultCellStyle.SelectionBackColor = select;
-            myDGV.AlternatingRowsDefaultCellStyle.SelectionBackColor = select;
-        }
-        private void SetRowColor_Evt(object sender, DataGridViewRowPostPaintEventArgs e)
-        {
-            DataGridView dgv = sender as DataGridView;
-            if (dgv == null)
-            {
-                return;
-            }
-            DataGridViewRow row = dgv.Rows[e.RowIndex];
-            if (IsRowSelected(e.RowIndex))
-            {
-                SetColor(row.DefaultCellStyle, selColor);
-            }
-            else
-            {
-                if (e.RowIndex % 2 == 0)
-                {
-                    SetColor(row.DefaultCellStyle, defColor);
-                }
-                else
-                {
-                    SetColor(row.DefaultCellStyle, altColor);
-                }
-            }
-        }
-
-        private void SetColor(DataGridViewCellStyle style, System.Drawing.Color color)
-        {
-            if (style.BackColor != color)
-            {
-                style.BackColor = color;
-            }
+            rowsColorHelper.SetRowColor(myDGV, def, alter, current);
         }
 
         /// <summary>
@@ -238,13 +176,18 @@ namespace HiCSUIHelper
 
             InitExistColumns8Tag(dgv); // 对已存在的列进行处理
 
-            if (CheckBoxIndex < 0 && isUsingCheck && !ColumnHasChk())  // 并创建多选列
+            if (CheckBoxIndex < 0 && isUsingCheck && !ColumnHasChk())  // 自动创建多选列
             {
                 checkColumn = DGViewUtil.CreateCheckBoxColumn(20, true);
                 myDGV.Columns.Add(checkColumn);
             }
 
-            CreateColumnsAndInit(dgv);// 创建不存在的列并设置相关信息
+
+            DataGridViewCheckBoxColumn chk = DGVColumnInfo.CreateAndInitControls(clsList, dgv);// 创建不存在的列并设置相关信息
+            if (chk != null) // 自动创建多选列
+            {
+                checkColumn = chk;
+            }
 			
             OnResize();     // 设置列宽
             return true;
@@ -257,16 +200,7 @@ namespace HiCSUIHelper
             {
                 return initHasChk.Equals("1");
             }
-            initHasChk = "0";
-            foreach (var it in columns.Values)
-            {
-                if (it.Type.ToLower().Equals("chk") ||
-                    it.Type.ToLower().Equals("chk_head"))
-                {
-                    initHasChk = "1";
-                    break;
-                }
-            }
+            initHasChk = DGVColumnInfo.HasChkColumn(clsList) ? "1" : "0";
             return initHasChk.Equals("1"); 
         }
 
@@ -303,18 +237,6 @@ namespace HiCSUIHelper
                 {
                     CheckBoxIndex = it.Index;
                 }
-            }
-        }
-        
-        /// <summary>
-        /// 对已存在的列进行处理,并创建多选列
-        /// </summary>
-        private void CreateColumnsAndInit(DataGridView dgv)
-        {
-            DataGridViewCheckBoxColumn chk = DGVColumnInfo.CreateAndInitControls(clsList, dgv);
-            if (chk != null)
-            {
-                checkColumn = chk;
             }
         }
 
