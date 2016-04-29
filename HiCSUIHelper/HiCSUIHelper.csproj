@@ -47,6 +47,7 @@
     <Compile Include="DGView\DGViewHelper.cs" />
     <Compile Include="DGView\DGViewUtil.cs" />
     <Compile Include="DGView\Impl\DGViewRowColor.cs" />
+    <Compile Include="DGView\Impl\InterceptProxy.cs" />
     <Compile Include="Form\FormWrap.cs" />
     <Compile Include="DGView\Impl\DatagridViewCheckBoxHeaderCell.cs" />
     <Compile Include="DGView\Impl\DGVColumnInfo.cs" />

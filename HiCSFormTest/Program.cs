@@ -5,13 +5,10 @@ using System.Windows.Forms;
 
 namespace HiCSFormTest
 {
-    static class Program
+    [MethodInvok]
+    public class RunCls: ContextBoundObject
     {
-        /// <summary>
-        /// 应用程序的主入口点。
-        /// </summary>
-        [STAThread]
-        static void Main()
+        public void Run()
         {
             string path = AppDomain.CurrentDomain.BaseDirectory;
             DirectoryInfo topDir = System.IO.Directory.GetParent(path);
@@ -28,6 +25,18 @@ data source=" + path + "/edqdb.xls";
             HiCSUserControl.ViewConfig.ViewXmlFolder = topDir.FullName + "/View";
             //HiCSProvider.UserConfig.SetUri("http://localhost:49653");
 
+        }
+    }
+    static class Program
+    {
+        /// <summary>
+        /// 应用程序的主入口点。
+        /// </summary>
+        [STAThread]
+        static void Main()
+        {
+            RunCls run = new RunCls();
+            run.Run();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
