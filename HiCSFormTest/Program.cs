@@ -23,7 +23,7 @@ data source=" + path + "/edqdb.xls";
 
             HiCSProvider.UserConfig.Init(2, conn, path + "/xmls");
             HiCSUserControl.ViewConfig.ViewXmlFolder = topDir.FullName + "/View";
-            //HiCSProvider.UserConfig.SetUri("http://localhost:49653");
+            HiCSProvider.UserConfig.SetUri("http://localhost:49653");
 
         }
     }

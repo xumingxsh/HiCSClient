@@ -4,6 +4,9 @@ using System.Data;
 
 namespace HiCSProvider.DB.Impl
 {
+    /// <summary>
+    ///  数据访问通用接口
+    /// </summary>
     interface IProviderHelper
     {
         /// <summary>
