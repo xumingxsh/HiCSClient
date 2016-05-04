@@ -32,6 +32,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HiCSProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\HiCSProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="HiCSUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\HiCSUtil.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.VisualStudio.QualityTools.UnitTestFramework, Version=10.1.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -114,17 +122,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\HiCSUtil\HiCSUtil\HiCSUtil.csproj">
-      <Project>{cab9edc6-e249-4e95-a544-3ecb7b04933f}</Project>
-      <Name>HiCSUtil</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HiCSModel\HiCSModel.csproj">
       <Project>{ba91ee53-3d9e-4672-8f91-6336fa25e858}</Project>
       <Name>HiCSModel</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HiCSProvider\HiCSProvider.csproj">
-      <Project>{43c2740d-83c2-4976-a2ed-0cad161cfbac}</Project>
-      <Name>HiCSProvider</Name>
     </ProjectReference>
     <ProjectReference Include="..\HiCSUIHelper\HiCSUIHelper.csproj">
       <Project>{f48d96f1-9e81-405c-8db7-e0759c650bf6}</Project>
