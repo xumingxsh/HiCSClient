@@ -12,3 +12,7 @@
 1： 打开命令行
 2： cd到msjet40.dll所在文件夹
 3： 输入regsvr32 msjet40.dll
+
+2016-05-04
+1: 由于HiCSProvider不会随着项目的变化而变化,所以将其从HiCSClient中拆分出来,单独建成一个项目(https://github.com/xumingxsh/HiCSProvider)
+2: HiCSUIHelper也具备单独建成一个项目的特质,暂时不将其分离,以后可能会进行.
