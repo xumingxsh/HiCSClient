@@ -21,7 +21,7 @@
             <TEXT>
 			Select ProductID,ProcessId,MaterialID,Name,MType,Model,Count
 			from [ProcessMaterial$] where productID='{0}'
-					and processID={1} {2}
+					and processID='{1}' {2}
             </TEXT>
         </SQL>
 		<!-- 取得产品工序的输入项信息-->

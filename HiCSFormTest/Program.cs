@@ -10,20 +10,24 @@ namespace HiCSFormTest
     {
         public void Run()
         {
+            HiCSUtil.HiLog.SetLogFun((string script, HiCSUtil.HiLog.LogType type) =>
+            {
+                System.Diagnostics.Trace.WriteLine(script);
+            });
             string path = AppDomain.CurrentDomain.BaseDirectory;
             DirectoryInfo topDir = System.IO.Directory.GetParent(path);
             topDir = System.IO.Directory.GetParent(topDir.FullName);
             topDir = System.IO.Directory.GetParent(topDir.FullName);
             topDir = System.IO.Directory.GetParent(topDir.FullName);
             path = topDir.FullName + "/Excel";
-            string conn = @"Provider=Microsoft.Jet.OLEDB.4.0;
-Extended Properties=Excel 8.0;
+            string conn = @"Provider=Microsoft.ACE.OLEDB.12.0;
+Extended Properties=Excel 12.0;
 data source=" + path + "/edqdb.xls";
 
 
             HiCSProvider.UserConfig.Init(2, conn, path + "/xmls");
             HiCSUserControl.ViewConfig.ViewXmlFolder = topDir.FullName + "/View";
-            HiCSProvider.UserConfig.SetUri("http://localhost:49653");
+            //HiCSProvider.UserConfig.SetUri("http://localhost:49653");
 
         }
     }
