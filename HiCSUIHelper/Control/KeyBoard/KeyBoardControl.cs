@@ -14,8 +14,6 @@ namespace HiCSUIHelper
     /// </summary>
     public partial class KeyBoardControl : UserControl
     {
-        
-        private Point offset;
         private bool isCapital = true;
 
         /// <summary>

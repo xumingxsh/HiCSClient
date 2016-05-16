@@ -33,6 +33,11 @@ namespace HiCSUserControl
                 if (chchText == null)
                 {
                     chchText = new CachProxy<TextInfo>();
+                    HiCSSQL.HiLog.SetLogFun((script) =>
+                    {
+                        HiCSUtil.HiLog.Error(script);
+                    });
+                    chchText.ParseEvt = TextInfo.Parse;
                     chchText.LoadXMLs(ViewXmlFolder);
                 }
                 return chchText;
@@ -43,19 +48,20 @@ namespace HiCSUserControl
         static CachProxy<TextInfo> chchText = null;
 
 
-        class TextInfo : ICachItem
+        class TextInfo 
         {
-            public bool Parse(XmlNode node)
+            public string Text { set; get; }
+
+            public static TextInfo Parse(XmlNode node)
             {
                 if (string.IsNullOrWhiteSpace(node.InnerText))
                 {
-                    return false;
+                    return null;
                 }
-
-                Text = node.InnerText;
-                return true;
+                TextInfo text = new TextInfo();
+                text.Text = node.InnerText;
+                return text;
             }
-            public string Text { set; get; }
         }
     }
 }

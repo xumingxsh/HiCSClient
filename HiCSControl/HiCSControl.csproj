@@ -38,10 +38,6 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\HiCSProvider.dll</HintPath>
     </Reference>
-    <Reference Include="HiCSSQL, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\..\..\EDQ\trunk\OutWardLib\lib\HiCSSQL.dll</HintPath>
-    </Reference>
     <Reference Include="HiCSUtil, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\lib\HiCSUtil.dll</HintPath>

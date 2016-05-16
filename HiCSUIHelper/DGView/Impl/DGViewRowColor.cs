@@ -14,7 +14,6 @@ namespace HiCSUIHelper
         System.Drawing.Color selColor;
 
         int CheckBoxIndex = -1;
-        DataGridView dgv;
 
         public void SetRowColor(DataGridView dgv, int chkIndex, System.Drawing.Color def, System.Drawing.Color alter, System.Drawing.Color current, System.Drawing.Color select)
         {            
