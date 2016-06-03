@@ -40,14 +40,14 @@
             this.dgvView.Name = "dgvView";
             this.dgvView.RowTemplate.Height = 23;
             this.dgvView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvView.Size = new System.Drawing.Size(292, 273);
+            this.dgvView.Size = new System.Drawing.Size(1039, 560);
             this.dgvView.TabIndex = 0;
             // 
             // DGViewTest
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(292, 273);
+            this.ClientSize = new System.Drawing.Size(1039, 560);
             this.Controls.Add(this.dgvView);
             this.Name = "DGViewTest";
             this.Text = "DGViewTest";
