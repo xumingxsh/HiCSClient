@@ -1,13 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSRestAPI", "HiCSRestAPI\HiCSRestAPI.csproj", "{5C248D08-CE15-4106-BFC3-16D8011563BA}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSDBProvider", "HiCSDBProvider\HiCSDBProvider.csproj", "{D6551EF7-2B1E-4696-A4F4-1C0188A79B49}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSProvider", "..\HiCSProvider\HiCSProvider\HiCSProvider.csproj", "{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSUtil", "..\HiCSUtil\HiCSUtil\HiCSUtil.csproj", "{CAB9EDC6-E249-4E95-A544-3ECB7B04933F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSDB", "..\HiCSDB\HiCSDB\HiCSDB.csproj", "{F39BFECF-98F0-4497-9A97-B325A6A1D854}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSSQL", "..\HiSQLManager\HiCSSQL\HiCSSQL.csproj", "{BEF889AF-2606-4317-8A8C-AD836DF46541}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSRest", "HiCSRest\HiCSRest.csproj", "{9D39A2DA-6B0E-4E98-AF50-BEF0A91A03D0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,10 +21,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5C248D08-CE15-4106-BFC3-16D8011563BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5C248D08-CE15-4106-BFC3-16D8011563BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5C248D08-CE15-4106-BFC3-16D8011563BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5C248D08-CE15-4106-BFC3-16D8011563BA}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D6551EF7-2B1E-4696-A4F4-1C0188A79B49}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D6551EF7-2B1E-4696-A4F4-1C0188A79B49}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D6551EF7-2B1E-4696-A4F4-1C0188A79B49}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -27,6 +29,22 @@ Global
 		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CAB9EDC6-E249-4E95-A544-3ECB7B04933F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CAB9EDC6-E249-4E95-A544-3ECB7B04933F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CAB9EDC6-E249-4E95-A544-3ECB7B04933F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CAB9EDC6-E249-4E95-A544-3ECB7B04933F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F39BFECF-98F0-4497-9A97-B325A6A1D854}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F39BFECF-98F0-4497-9A97-B325A6A1D854}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F39BFECF-98F0-4497-9A97-B325A6A1D854}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F39BFECF-98F0-4497-9A97-B325A6A1D854}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEF889AF-2606-4317-8A8C-AD836DF46541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEF889AF-2606-4317-8A8C-AD836DF46541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEF889AF-2606-4317-8A8C-AD836DF46541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEF889AF-2606-4317-8A8C-AD836DF46541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D39A2DA-6B0E-4E98-AF50-BEF0A91A03D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D39A2DA-6B0E-4E98-AF50-BEF0A91A03D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D39A2DA-6B0E-4E98-AF50-BEF0A91A03D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D39A2DA-6B0E-4E98-AF50-BEF0A91A03D0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

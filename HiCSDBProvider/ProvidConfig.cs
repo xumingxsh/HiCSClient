@@ -18,10 +18,19 @@ namespace HiCSDBProvider
         /// 数据库连接字符串
         /// </summary>
         public static string Conn { set; get; }
-
+        
         /// <summary>
         /// 存储SQL的XML所在文件夹
         /// </summary>
-        public static string XMLFolder { get; set; }
+        public static string XMLFolder 
+        { 
+            set
+            {
+                HiCSSQL.HiLog.SetLogFun(script => {
+                    HiCSUtil.HiLog.Error(script);
+                });
+                SQLProxy.LoadXMLs(value);
+            }
+        }
     }
 }

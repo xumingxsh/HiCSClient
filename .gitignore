@@ -40,3 +40,5 @@
 /HiCSWebService/bin
 /HiCSDBProvider/bin
 /HiCSDBProvider/obj
+/HiCSRest/obj
+/HiCSRest/bin

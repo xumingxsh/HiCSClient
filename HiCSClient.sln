@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.21005.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSModel", "HiCSModel\HiCSModel.csproj", "{BA91EE53-3D9E-4672-8F91-6336FA25E858}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSUIHelper", "HiCSUIHelper\HiCSUIHelper.csproj", "{F48D96F1-9E81-405C-8DB7-E0759C650BF6}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiUIFormTest", "HiUIFormTest\HiUIFormTest.csproj", "{2B05EA94-C494-4193-8F09-D3ABE258D724}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HiCSProvider", "..\HiCSProvider\HiCSProvider\HiCSProvider.csproj", "{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{2B05EA94-C494-4193-8F09-D3ABE258D724}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2B05EA94-C494-4193-8F09-D3ABE258D724}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2B05EA94-C494-4193-8F09-D3ABE258D724}.Release|Any CPU.Build.0 = Release|Any CPU
+		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{43C2740D-83C2-4976-A2ED-0CAD161CFBAC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

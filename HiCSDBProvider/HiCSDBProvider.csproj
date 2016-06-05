@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>HiCSDBProvider</RootNamespace>
     <AssemblyName>HiCSDBProvider</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -30,15 +31,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HiCSDB">
-      <HintPath>..\lib\HiCSDB.dll</HintPath>
-    </Reference>
-    <Reference Include="HiCSSQL">
-      <HintPath>..\lib\HiCSSQL.dll</HintPath>
-    </Reference>
-    <Reference Include="HiCSUtil">
-      <HintPath>..\lib\HiCSUtil.dll</HintPath>
-    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -53,6 +45,20 @@
     <Compile Include="ProvidConfig.cs" />
     <Compile Include="Proxy\SQLHelper.cs" />
     <Compile Include="Proxy\SqlInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\HiCSDB\HiCSDB\HiCSDB.csproj">
+      <Project>{f39bfecf-98f0-4497-9a97-b325a6a1d854}</Project>
+      <Name>HiCSDB</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HiCSUtil\HiCSUtil\HiCSUtil.csproj">
+      <Project>{cab9edc6-e249-4e95-a544-3ecb7b04933f}</Project>
+      <Name>HiCSUtil</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\HiSQLManager\HiCSSQL\HiCSSQL.csproj">
+      <Project>{bef889af-2606-4317-8a8c-ad836df46541}</Project>
+      <Name>HiCSSQL</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
