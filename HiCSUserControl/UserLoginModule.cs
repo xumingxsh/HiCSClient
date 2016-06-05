@@ -40,15 +40,10 @@ namespace HiCSUserControl
         }
 
         /// <summary>
-        /// 所有用户注销通知
-        /// </summary>
-        public delegate void OnProcessCompletedHandle();
-
-        /// <summary>
         /// 设置通知函数
         /// </summary>
         /// <param name="evt"></param>
-        public void SetNotify(OnProcessCompletedHandle evt)
+        public void SetNotify(Action evt)
         {
             handle = evt;
         }
@@ -116,6 +111,6 @@ namespace HiCSUserControl
 
         UserLoginControl control = new UserLoginControl();
         DGViewHelper dgvHelper = new DGViewHelper();
-        OnProcessCompletedHandle handle = null;
+        Action handle = null;
     }
 }

@@ -21,19 +21,13 @@ namespace HiCSUserControl
             InitializeComponent();
         }
 
-        /// <summary>
-        /// 双击事件
-        /// </summary>
-        /// <param name="material"></param>
-        public delegate void OnDbClickHandle(Material material);
-
-        private OnDbClickHandle dbHandler = null;
+        private Action<Material> dbHandler = null;
 
         /// <summary>
         /// 设置双击事件
         /// </summary>
         /// <param name="evt"></param>
-        public void SetDbClick(OnDbClickHandle evt)
+        public void SetDbClick(Action<Material> evt)
         {
             dbHandler = evt;
         }

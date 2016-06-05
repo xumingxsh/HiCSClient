@@ -17,7 +17,7 @@ namespace HiCSUIHelper
         System.Windows.Forms.VisualStyles.CheckBoxState _cbState =
             System.Windows.Forms.VisualStyles.CheckBoxState.UncheckedNormal;
 
-        public event CheckBoxClickedHandler OnCheckBoxClicked;
+        public event Action<DataGridView, bool> OnCheckBoxClicked;
 
         public DatagridViewCheckBoxHeaderCell()
         {
@@ -58,7 +58,8 @@ namespace HiCSUIHelper
             CheckBoxRenderer.DrawCheckBox
             (graphics, checkBoxLocation, _cbState);
         }
-        public delegate void CheckBoxClickedHandler(DataGridView dgv, bool state);
+        
+
         protected override void OnMouseClick(DataGridViewCellMouseEventArgs e)
         {
             Point p = new Point(e.X + _cellLocation.X, e.Y + _cellLocation.Y);
