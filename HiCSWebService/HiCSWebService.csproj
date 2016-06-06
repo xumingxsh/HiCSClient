@@ -41,6 +41,10 @@
     <Reference Include="HiCSDBProvider">
       <HintPath>..\lib\HiCSDBProvider.dll</HintPath>
     </Reference>
+    <Reference Include="HiCSProvider, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\lib\HiCSProvider.dll</HintPath>
+    </Reference>
     <Reference Include="HiCSUtil">
       <HintPath>..\lib\HiCSUtil.dll</HintPath>
     </Reference>
@@ -61,7 +65,7 @@
       <DependentUpon>CommonProvide.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Tool\DBHelper.cs" />
+    <Compile Include="Tool\DBImpl.cs" />
     <Compile Include="Tool\UserConfig.cs" />
   </ItemGroup>
   <ItemGroup>

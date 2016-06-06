@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Services;
 
 using HiCSUtil;
+using HiCSProvider;
+
 using HiCSWebService.Tool;
 
 namespace HiCSWebService.Service
@@ -64,6 +66,20 @@ namespace HiCSWebService.Service
         public int ExecuteNoQuery8SQL(string sql)
         {
             throw new NotImplementedException("this function not support");
+        }
+
+        IRemoteProvide provider = null;
+
+        private IRemoteProvide Provider
+        {
+            get
+            {
+                if (provider == null)
+                {
+                    provider = new DBImpl();
+                }
+                return provider;
+            }
         }
     }
 }
