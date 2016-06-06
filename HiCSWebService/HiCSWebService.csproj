@@ -38,29 +38,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="HiCSDB">
-      <HintPath>..\..\CommonLib\HiCSDB.dll</HintPath>
+    <Reference Include="HiCSDBProvider">
+      <HintPath>..\lib\HiCSDBProvider.dll</HintPath>
     </Reference>
-    <Reference Include="HiCSSQL">
-      <HintPath>..\..\CommonLib\HiCSSQL.dll</HintPath>
+    <Reference Include="HiCSUtil">
+      <HintPath>..\lib\HiCSUtil.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Web.DynamicData" />
-    <Reference Include="System.Web.Entity" />
-    <Reference Include="System.Web.ApplicationServices" />
-    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
-    <Reference Include="System.Core" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="System.Web.Extensions" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
-    <Reference Include="System.Configuration" />
     <Reference Include="System.Web.Services" />
-    <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Service\CommonProvide.asmx" />
@@ -72,7 +61,8 @@
       <DependentUpon>CommonProvide.asmx</DependentUpon>
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Service\Impl\DBProvideImpl.cs" />
+    <Compile Include="Tool\DBHelper.cs" />
+    <Compile Include="Tool\UserConfig.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Web.Debug.config">
@@ -81,16 +71,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\HiCSProvider\HiCSProvider\HiCSProvider.csproj">
-      <Project>{43c2740d-83c2-4976-a2ed-0cad161cfbac}</Project>
-      <Name>HiCSProvider</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\HiCSUtil\HiCSUtil\HiCSUtil.csproj">
-      <Project>{cab9edc6-e249-4e95-a544-3ecb7b04933f}</Project>
-      <Name>HiCSUtil</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

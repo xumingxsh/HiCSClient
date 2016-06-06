@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HiCSDBProvider">
+      <HintPath>..\lib\HiCSDBProvider.dll</HintPath>
+    </Reference>
+    <Reference Include="HiCSUtil">
+      <HintPath>..\lib\HiCSUtil.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -75,16 +81,6 @@
     <None Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\HiCSUtil\HiCSUtil\HiCSUtil.csproj">
-      <Project>{cab9edc6-e249-4e95-a544-3ecb7b04933f}</Project>
-      <Name>HiCSUtil</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\HiCSDBProvider\HiCSDBProvider.csproj">
-      <Project>{d6551ef7-2b1e-4696-a4f4-1c0188a79b49}</Project>
-      <Name>HiCSDBProvider</Name>
-    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -31,6 +31,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HiCSProvider">
+      <HintPath>..\lib\HiCSProvider.dll</HintPath>
+    </Reference>
     <Reference Include="HiCSSQL">
       <HintPath>..\lib\HiCSSQL.dll</HintPath>
     </Reference>
@@ -87,10 +90,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\HiCSProvider\HiCSProvider\HiCSProvider.csproj">
-      <Project>{43c2740d-83c2-4976-a2ed-0cad161cfbac}</Project>
-      <Name>HiCSProvider</Name>
-    </ProjectReference>
     <ProjectReference Include="..\HiCSControl\HiCSControl.csproj">
       <Project>{f58ed24c-da0a-43ce-9d59-d2ad5c29c7da}</Project>
       <Name>HiCSControl</Name>

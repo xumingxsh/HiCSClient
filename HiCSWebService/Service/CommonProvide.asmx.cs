@@ -5,9 +5,7 @@ using System.Web;
 using System.Web.Services;
 
 using HiCSUtil;
-using HiCSProvider;
-
-using HiCSWebService.Service.Impl;
+using HiCSWebService.Tool;
 
 namespace HiCSWebService.Service
 {
@@ -35,7 +33,7 @@ namespace HiCSWebService.Service
                 return -1;
             }
 
-            return provider.ExecuteNoQuery(parm.SQL_ID, parm.Dic, parm.Arr);
+            return DBHelper.ExecuteNoQuery(parm.SQL_ID, parm.Dic, parm.Arr);
         }
 
         [WebMethod]
@@ -47,7 +45,7 @@ namespace HiCSWebService.Service
                 return null;
             }
 
-            return provider.ExecuteQuery(parm.SQL_ID, parm.Dic, parm.Arr);
+            return DBHelper.ExecuteQuery(parm.SQL_ID, parm.Dic, parm.Arr);
         }
         
         [WebMethod]
@@ -58,7 +56,7 @@ namespace HiCSWebService.Service
             {
                 return "";
             }
-            return provider.ExecuteScalar(parm.SQL_ID, parm.Dic, parm.Arr);
+            return DBHelper.ExecuteScalar(parm.SQL_ID, parm.Dic, parm.Arr);
         }
 
 
@@ -66,20 +64,6 @@ namespace HiCSWebService.Service
         public int ExecuteNoQuery8SQL(string sql)
         {
             throw new NotImplementedException("this function not support");
-        }
-
-        IRemoteProvide provider = null;
-
-        private IRemoteProvide Provider
-        {
-            get
-            {
-                if (provider == null)
-                {
-                    //provider = 
-                }
-                return provider;
-            }
         }
     }
 }
